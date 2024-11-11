@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/resource")
 public class ResourceController {
 	@GetMapping("/user")
+	@PreAuthorize("hasAnyAuthority('ROLE_USER', 'OIDC_USER')")
 	public ResponseEntity<MessageDTO> user(Authentication authentication) {
 		return ResponseEntity.ok(new MessageDTO("Hello " + authentication.getName()));
 	}
