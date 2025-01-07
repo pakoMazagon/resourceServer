@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  bar-liquibase:
+    image: liquibase/liquibase
+    command: --url="jdbc:postgresql://$DB_HOST:5432/$DB_NAME" --username="$DB_USERNAME" --password="$DB_PASSWORD" --searchPath=/liquibase/project1 --changeLogFile=changelog.xml $DB_COMMAND --log-level=info
+    volumes:
+      - ../liquibase/changelog.xml:/liquibase/project1/changelog.xml
+      - ../liquibase/scripts:/liquibase/project1/scripts
+    networks:
+      - auth-net
+networks:
+  auth-net:
+    name: auth-net

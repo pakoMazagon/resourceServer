@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: TPV Products API
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      summary: Obtener todos los productos
+      responses:
+        '200':
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductoBBDD'
+components:
+  schemas:
+    ProductoBBDD:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        familia:
+          type: string
+        nombre:
+          type: string
+        code:
+          type: string
+        precio1:
+          type: number
+        precio2:
+          type: number
+        precio3:
+          type: number
+        cocina:
+          type: boolean
+        seccion:
+          type: string
