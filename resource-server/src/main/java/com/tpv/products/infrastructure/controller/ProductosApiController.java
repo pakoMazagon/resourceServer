@@ -3,6 +3,7 @@ package com.tpv.products.infrastructure.controller;
 
 import com.tpv.products.domain.entities.Producto;
 import com.tpv.products.domain.usecases.ProductoUC;
+import com.tpv.products.infrastructure.controller.mapper.ProductBBDDMapper;
 import com.tpv.products.infrastructure.dto.ProductoBBDDDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,6 @@ public class ProductosApiController implements ProductsApi {
     public ResponseEntity<List<ProductoBBDDDTO>> productsGet() {
         log.info("init REQUEST productsGet");
         final List<Producto> productosList = this.productoUC.obtenerTodosLosProductos();
-
-        log.info("end REQUEST addCreateUser");
         return ResponseEntity.status(HttpStatus.OK).body(productosList.stream().map(prod -> this.mapper.mapToProductoBBDDDTO(prod)).toList());
     }
 }

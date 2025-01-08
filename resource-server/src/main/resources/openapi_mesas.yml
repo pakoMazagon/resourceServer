@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: TPV Mesas API
+  version: 1.0.0
+paths:
+  /mesas:
+    get:
+      summary: Obtener todas las mesas
+      responses:
+        '200':
+          description: Lista de mesas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mesas'
+components:
+  schemas:
+    Mesas:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        numero:
+          type: integer
+        sector:
+          type: string
+        nombreTradicional:
+          type: string
+        nombreActual:
+          type: string
+        ocupada:
+          type: boolean
+        camarero:
+          type: string
+        cantidad:
+          type: number
+          format: float
+        lastUpdatedAt:
+          type: string
+          format: date-time
+        version:
+          type: integer
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductoEnMesa'
+    ProductoEnMesa:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nombre:
+          type: string
+        code:
+          type: string
+        precio:
+          type: number
+          format: float
+        cantidad:
+          type: integer
+        estado:
+          type: string
+        fechaHoraPedido:
+          type: string
+          format: date-time

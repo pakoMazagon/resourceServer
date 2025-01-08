@@ -62,6 +62,11 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.1</version>
 		</dependency>
+		<!-- Este es para los dateTime-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 		<!--  Hasta aqui openAPI  -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -138,6 +143,36 @@
 							<library>spring-boot</library>
 							<modelPackage>com.tpv.products.infrastructure.dto</modelPackage>
 							<apiPackage>com.tpv.products.infrastructure.controller</apiPackage>
+							<configOptions>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<useOptional>true</useOptional>
+								<serializableModel>true</serializableModel>
+								<useSpringBoot3>true</useSpringBoot3>
+								<interfaceOnly>true</interfaceOnly>
+								<useLombok>true</useLombok>
+							</configOptions>
+						</configuration>
+					</execution>
+					<!-- GENERATE MESAS API -->
+					<execution>
+						<id>generate-mesas-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>src/main/resources/openapi_mesas.yml</inputSpec>
+							<generatorName>spring</generatorName>
+							<!--							<modelPackage></modelPackage>-->
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<skipOperationExample>true</skipOperationExample>
+							<!--							<generateApis>false</generateApis>-->
+							<generateModelTests>false</generateModelTests>
+							<generateApiTests>false</generateApiTests>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<library>spring-boot</library>
+							<modelPackage>com.tpv.mesas.infrastructure.dto</modelPackage>
+							<apiPackage>com.tpv.mesas.infrastructure.controller</apiPackage>
 							<configOptions>
 								<sourceFolder>src/main/java</sourceFolder>
 								<dateLibrary>java8</dateLibrary>

@@ -1,4 +1,4 @@
-package com.tpv.products.infrastructure.controller;
+package com.tpv.products.infrastructure.controller.mapper;
 
 import com.tpv.products.domain.entities.Producto;
 import com.tpv.products.infrastructure.dto.ProductoBBDDDTO;

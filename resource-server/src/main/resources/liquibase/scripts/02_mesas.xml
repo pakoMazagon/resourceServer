@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <changeSet id="create-table-mesas" author="frc">
+        
+        <sql stripComments="true">
+            CREATE TABLE mesa (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- Identificador único generado automáticamente
+                numero INTEGER NOT NULL, -- Número de la mesa
+                sector VARCHAR(50) NOT NULL, -- Sector al que pertenece (barra, salón, terraza, etc.)
+                nombre_tradicional VARCHAR(100) NOT NULL, -- Nombre tradicional de la mesa
+                nombre_actual VARCHAR(100), -- Nombre actual (si está ocupada, cliente actual)
+                ocupada BOOLEAN NOT NULL DEFAULT false, -- Estado de ocupación
+                camarero VARCHAR(100), -- Nombre del camarero asignado (si aplica)
+                cantidad DOUBLE PRECISION NOT NULL DEFAULT 0.0, -- Cantidad asociada a la mesa (facturación inicial o temporal)
+                last_updated_at TIMESTAMP NOT NULL DEFAULT now(), -- Última fecha de modificación
+                version INTEGER NOT NULL DEFAULT 1, -- Versión de la fila para control de auditorías
+                UNIQUE (numero, sector) -- Combinación única para evitar duplicados en un sector
+            );
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-salon-barra" author="frc">
+        
+        <sql stripComments="true">
+            INSERT INTO Mesa (id, numero, sector, nombre_tradicional, nombre_actual, ocupada, camarero, cantidad, last_updated_at, version) VALUES
+            (gen_random_uuid(), 1, 'salonBarra', '1', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 2, 'salonBarra', '2', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 3, 'salonBarra', '3', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 4, 'salonBarra', '4', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 5, 'salonBarra', '5', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 6, 'salonBarra', '6', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 7, 'salonBarra', '7', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 8, 'salonBarra', '8', '', false, '', 0.0, now(), 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-salon-comedor" author="frc">
+        
+        <sql stripComments="true">
+            INSERT INTO Mesa (id, numero, sector, nombre_tradicional, nombre_actual, ocupada, camarero, cantidad, last_updated_at, version) VALUES
+            (gen_random_uuid(), 1, 'salonComedor', '1', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 2, 'salonComedor', '2', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 3, 'salonComedor', '3', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 4, 'salonComedor', '4', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 5, 'salonComedor', '5', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 6, 'salonComedor', '6', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 7, 'salonComedor', '7', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 8, 'salonComedor', '8', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 9, 'salonComedor', '9', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 10, 'salonComedor', '10', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 11, 'salonComedor', '11', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 12, 'salonComedor', '12', '', false, '', 0.0, now(), 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-barra" author="frc">
+        
+        <sql stripComments="true">
+            INSERT INTO Mesa (id, numero, sector, nombre_tradicional, nombre_actual, ocupada, camarero, cantidad, last_updated_at, version) VALUES
+            (gen_random_uuid(), 1, 'barra', '1', 'cliente1', true, 'paco', 0.0, now(), 1),
+            (gen_random_uuid(), 2, 'barra', '2', 'cliente2', true, 'paco', 0.0, now(), 1),
+            (gen_random_uuid(), 3, 'barra', '3', 'cliente3', true, 'paco', 0.0, now(), 1),
+            (gen_random_uuid(), 4, 'barra', '4', 'cliente4', true, 'paco', 0.0, now(), 1),
+            (gen_random_uuid(), 5, 'barra', '5', 'cliente5', true, 'paco', 0.0, now(), 1),
+            (gen_random_uuid(), 6, 'barra', '6', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 7, 'barra', '7', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 8, 'barra', '8', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 9, 'barra', '9', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 10, 'barra', '10', '', false, '', 0.0, now(), 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-terraza" author="frc">
+
+        <sql stripComments="true">
+            INSERT INTO Mesa (id, numero, sector, nombre_tradicional, nombre_actual, ocupada, camarero, cantidad, last_updated_at, version) VALUES
+            (gen_random_uuid(), 1, 'terraza', '1', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 2, 'terraza', '2', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 3, 'terraza', '3', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 4, 'terraza', '4', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 5, 'terraza', '5', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 6, 'terraza', '6', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 7, 'terraza', '7', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 8, 'terraza', '8', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 9, 'terraza', '9', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 10, 'terraza', '10', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 11, 'terraza', '11', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 12, 'terraza', '12', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 13, 'terraza', '13', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 14, 'terraza', '14', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 15, 'terraza', '15', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 16, 'terraza', '16', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 17, 'terraza', '17', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 18, 'terraza', '18', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 19, 'terraza', '19', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 20, 'terraza', '20', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 21, 'terraza', '21', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 22, 'terraza', '22', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 23, 'terraza', '23', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 24, 'terraza', '24', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 25, 'terraza', '25', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 26, 'terraza', '26', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 27, 'terraza', '27', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 28, 'terraza', '28', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 29, 'terraza', '29', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 30, 'terraza', '30', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 31, 'terraza', '31', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 32, 'terraza', '32', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 33, 'terraza', '33', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 34, 'terraza', '34', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 35, 'terraza', '35', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 36, 'terraza', '36', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 37, 'terraza', '37', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 38, 'terraza', '38', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 39, 'terraza', '39', '', false, '', 0.0, now(), 1),
+            (gen_random_uuid(), 40, 'terraza', '40', '', false, '', 0.0, now(), 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="create-table-mesa-servida" author="frc">
+
+        <sql stripComments="true">
+            CREATE TABLE mesa_servida (
+            id UUID PRIMARY KEY,
+            mesa_referencia VARCHAR(255) NOT NULL,
+            nombre VARCHAR(255) NOT NULL,
+            camarero VARCHAR(255),
+            cantidad DOUBLE PRECISION,
+            fecha_inicio TIMESTAMP NOT NULL,
+            fecha_fin TIMESTAMP,
+            arqueada BOOLEAN NOT NULL,
+            activa BOOLEAN NOT NULL,
+            estado VARCHAR(255) NOT NULL,
+            metodo_pago VARCHAR(255),
+            version INTEGER NOT NULL,
+            last_updated_at TIMESTAMP NOT NULL,
+            last_updated_by VARCHAR(255)
+            );
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="create-table-producto-mesa" author="frc">
+
+        <sql stripComments="true">
+            CREATE TABLE producto_mesa (
+            id UUID PRIMARY KEY,
+            mesa_referencia VARCHAR(255) NOT NULL,
+            proucto_referencia VARCHAR(255) NOT NULL,
+            unidades INTEGER NOT NULL,
+            precio DOUBLE PRECISION NOT NULL,
+            nombre VARCHAR(255) NOT NULL,
+            estado VARCHAR(255) NOT NULL,
+            version INTEGER NOT NULL
+            );
+
+        </sql>
+    </changeSet>
+    
+    
+    
+</databaseChangeLog>
