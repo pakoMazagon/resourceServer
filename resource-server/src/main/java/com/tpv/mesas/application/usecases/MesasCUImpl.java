@@ -20,4 +20,10 @@ public class MesasCUImpl implements MesasCU {
     public List<Mesa> obtenerTodas() {
         return this.mesaPort.obtenerTodas();
     }
+
+    @Override
+    public Mesa actualizarMesa(Mesa mesa) {
+        this.mesaPort.actualizarMesa(mesa);
+        return mesa;
+    }
 }

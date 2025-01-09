@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MesasCU {
     List<Mesa> obtenerTodas();
+
+    Mesa actualizarMesa(Mesa mesa);
 }

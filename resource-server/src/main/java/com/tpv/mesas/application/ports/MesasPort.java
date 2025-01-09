@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MesasPort {
     List<Mesa> obtenerTodas();
+
+    void actualizarMesa(Mesa mesa);
 }

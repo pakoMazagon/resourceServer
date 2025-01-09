@@ -1,6 +1,5 @@
 package com.tpv.resource_server.config;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -43,8 +42,8 @@ public class BeansConfig {
                             throws IOException {
                         return jsonParser.getText() != null ? OffsetDateTime.parse(jsonParser.getText()) : null;
                     }
-                }))
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                }));
+//                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
 

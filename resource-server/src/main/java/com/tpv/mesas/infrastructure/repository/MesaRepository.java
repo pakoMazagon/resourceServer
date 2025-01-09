@@ -11,7 +11,7 @@ public interface MesaRepository extends CrudRepository<Mesa, UUID> {
 
     Optional<Mesa> findById(UUID id);
 
-    List<Mesa> findAll();
+    List<Mesa> findAllByOrderBySectorAscNumeroAsc();
 
     List<Mesa> findBySector(String sector);
 

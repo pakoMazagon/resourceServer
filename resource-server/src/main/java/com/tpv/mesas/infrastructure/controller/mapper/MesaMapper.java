@@ -10,14 +10,19 @@ import java.time.ZoneOffset;
 
 @Mapper(collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, componentModel = "spring", nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface MesaMapper {
-    @Mapping(target = "lastUpdatedAt", source = "lastUpdatedAt")
+    @Mapping(target = "lastUpdatedAt", source = "lastUpdatedAt", qualifiedByName = "mapToOffsetDateTime")
     MesasDTO mapToMesaDTO(Mesa mesa);
 
+    @Mapping(target = "lastUpdatedAt", source = "lastUpdatedAt", qualifiedByName = "mapToLocalDateTime")
+    Mesa mapToMesa(MesasDTO mesaDTO);
+
+    @Named("mapToOffsetDateTime")
     default OffsetDateTime mapLocalDateTimeToOffsetDateTime(LocalDateTime localDateTime) {
-        if (localDateTime == null) {
-            return null;
-        }
-        // Aquí puedes usar cualquier offset, como ZoneOffset.UTC
-        return localDateTime.atOffset(ZoneOffset.UTC); // O el offset que necesites
+        return localDateTime == null ? null : localDateTime.atOffset(ZoneOffset.UTC);
+    }
+
+    @Named("mapToLocalDateTime")
+    default LocalDateTime mapOffsetDateTimeToLocalDateTime(OffsetDateTime offsetDateTime) {
+        return offsetDateTime == null ? null : offsetDateTime.toLocalDateTime();
     }
 }

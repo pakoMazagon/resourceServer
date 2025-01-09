@@ -6,6 +6,7 @@ import com.tpv.mesas.infrastructure.repository.MesaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -16,6 +17,12 @@ public class MesaAdapter implements MesasPort {
 
     @Override
     public List<Mesa> obtenerTodas() {
-        return this.mesaRepository.findAll();
+        return this.mesaRepository.findAllByOrderBySectorAscNumeroAsc();
+    }
+
+    @Override
+    public void actualizarMesa(Mesa mesa) {
+        mesa.setLastUpdatedAt(LocalDateTime.now());
+        this.mesaRepository.save(mesa);
     }
 }

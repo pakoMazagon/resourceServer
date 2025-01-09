@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/resource")
 public class ResourceController {
-	@GetMapping("/user")
-	@PreAuthorize("hasAnyAuthority('ROLE_USER', 'OIDC_USER')")
-	public ResponseEntity<MessageDTO> user(Authentication authentication) {
-		return ResponseEntity.ok(new MessageDTO("Hello " + authentication.getName()));
-	}
+    @GetMapping("/user")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'OIDC_USER')")
+    public ResponseEntity<MessageDTO> user(Authentication authentication) {
+        return ResponseEntity.ok(new MessageDTO(authentication.getName()));
+    }
 
-	@GetMapping("/admin")
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public ResponseEntity<MessageDTO> admin(Authentication authentication) {
-		return ResponseEntity.ok(new MessageDTO("Hello ADMIN. " + authentication.getName()));
-	}
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<MessageDTO> admin(Authentication authentication) {
+        return ResponseEntity.ok(new MessageDTO(authentication.getName()));
+    }
 }
