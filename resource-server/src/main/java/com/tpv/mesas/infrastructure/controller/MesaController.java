@@ -1,6 +1,6 @@
 package com.tpv.mesas.infrastructure.controller;
 
-import com.tpv.mesas.domain.entities.Mesa;
+import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import com.tpv.mesas.infrastructure.controller.mapper.MesaMapper;
 import com.tpv.mesas.infrastructure.dto.MesasDTO;
@@ -28,9 +28,15 @@ public class MesaController implements MesasApi {
     private MesaMapper mapper;
 
     @Override
+    public ResponseEntity<MesasDTO> mesasBuscarGet(String id) {
+        final MesaServida mesa = this.mesasCU.obtenerMesaServidaPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(this.mapper.mapToMesaDTO(mesa));
+    }
+
+    @Override
     public ResponseEntity<List<MesasDTO>> mesasGet() {
         log.info("init REQUEST mesasGet");
-        final List<Mesa> mesasList = this.mesasCU.obtenerTodas();
+        final List<MesaServida> mesasList = this.mesasCU.obtenerTodas();
         return ResponseEntity.status(HttpStatus.OK).body(mesasList.stream().map(mesa -> this.mapper.mapToMesaDTO(mesa)).toList());
     }
 
@@ -38,11 +44,11 @@ public class MesaController implements MesasApi {
     public ResponseEntity<UpdateMesa200ResponseDTO> updateMesa(
             @Parameter(name = "MesasDTO", description = "", required = true) @Valid @RequestBody MesasDTO mesasDTO
     ) {
-        final Mesa mesa = this.mapper.mapToMesa(mesasDTO);
+        final MesaServida mesa = this.mapper.mapToMesaServida(mesasDTO);
         this.mesasCU.actualizarMesa(mesa);
 
         final UpdateMesa200ResponseDTO bodyDev = new UpdateMesa200ResponseDTO();
-        bodyDev.setMessage(String.format("Mesa {} modificada ocupada {} por camarero{}", mesasDTO.getNombreTradicional(), mesasDTO.getOcupada(), mesasDTO.getCamarero()));
+        bodyDev.setMessage(String.format("Mesa {} modificada ocupada {} por camarero{}", mesasDTO.getNombre(), mesasDTO.getOcupada(), mesasDTO.getCamarero()));
         return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
     }
 }

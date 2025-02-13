@@ -2,6 +2,7 @@ package com.tpv.mesas.domain.entities;
 
 import com.tpv.mesas.domain.entities.enums.EstadoProductoEnum;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -18,13 +20,19 @@ import java.util.UUID;
 @Entity
 public class ProductoMesa {
     @Id
+    @GeneratedValue(generator = "UUID")
     private UUID id;
     private String mesaReferencia;
-    private String prouctoReferencia;
+    private String productoReferencia;
     private Integer unidades;
     private Double precio;
     private String nombre;
+    private String code;
     private EstadoProductoEnum estado;
+    private LocalDateTime fechaHoraCreacion;
+    private LocalDateTime fechaHoraPedido;
+    private LocalDateTime fechaHoraServido;
+
     @Version
     private int version;
 }

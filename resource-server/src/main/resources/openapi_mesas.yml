@@ -3,6 +3,34 @@ info:
   title: TPV Mesas API
   version: 1.0.0
 paths:
+  /mesas/buscar:
+    get:
+      summary: Obtener mesa por id
+      description: Devuelve una mesa específica utilizando un parámetro de consulta.
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: El ID de la mesa a obtener.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mesa solicitada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mesas'
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Parámetro 'id' es requerido."
   /mesas:
     get:
       summary: Obtener todas las mesas
@@ -78,13 +106,14 @@ components:
         id:
           type: string
           format: uuid
+        mesaReferencia:
+          type: string
+          format: uuid
         numero:
           type: integer
         sector:
           type: string
-        nombreTradicional:
-          type: string
-        nombreActual:
+        nombre:
           type: string
         ocupada:
           type: boolean
@@ -93,6 +122,8 @@ components:
         cantidad:
           type: number
           format: float
+        estado:
+          type: string
         lastUpdatedAt:
           type: string
           format: date-time
@@ -108,17 +139,29 @@ components:
         id:
           type: string
           format: uuid
+        mesaReferencia:
+          type: string
+        productoReferencia:
+          type: string        
+        unidades:
+          type: integer
+        precio:
+          type: number
+          format: float
         nombre:
           type: string
         code:
           type: string
-        precio:
-          type: number
-          format: float
-        cantidad:
-          type: integer
         estado:
           type: string
         fechaHoraPedido:
           type: string
           format: date-time
+        fechaHoraServido:
+          type: string
+          format: date-time
+        fechaHoraCreacion:
+          type: string
+          format: date-time
+        version:
+          type: integer

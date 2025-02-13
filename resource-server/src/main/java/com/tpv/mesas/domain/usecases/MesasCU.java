@@ -1,11 +1,13 @@
 package com.tpv.mesas.domain.usecases;
 
-import com.tpv.mesas.domain.entities.Mesa;
+import com.tpv.mesas.domain.entities.MesaServida;
 
 import java.util.List;
 
 public interface MesasCU {
-    List<Mesa> obtenerTodas();
+    List<MesaServida> obtenerTodas();
 
-    Mesa actualizarMesa(Mesa mesa);
+    MesaServida actualizarMesa(MesaServida mesa);
+
+    MesaServida obtenerMesaServidaPorId(String id);
 }
