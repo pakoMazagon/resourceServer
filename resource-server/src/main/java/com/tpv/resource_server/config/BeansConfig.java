@@ -24,6 +24,7 @@ public class BeansConfig {
         cors.addAllowedMethod("*");
         cors.setAllowCredentials(true);
         cors.addAllowedOrigin("http://127.0.0.1:5173");
+        cors.addAllowedOrigin("http://192.168.1.42:5173");
         source.registerCorsConfiguration("/**", cors);
         return source;
     }
