@@ -98,6 +98,225 @@ paths:
                     type: string
                     description: Descripción del error.
                     example: "Ocurrió un error inesperado."
+  /mesas/{id}/efectivo:
+    post:
+      summary: Cobrar mesa
+      description: Realiza el cobro de la mesa y finaliza la transacción.
+      operationId: cobraMesaEfectivo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa a cobrar.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La mesa fue cobrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Mesa cobrada exitosamente."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /mesas/{id}/nombre:
+    patch:
+      summary: Modificar nombre de la mesa
+      description: Actualiza el nombre de la mesa.
+      operationId: cambiaNombreMesa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa a renombrar.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: "Nuevo nombre"
+      responses:
+        '200':
+          description: Nombre de la mesa actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Nombre actualizado exitosamente."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /mesas/{id}:
+    delete:
+      summary: Borrar mesa
+      description: Elimina una mesa del sistema.
+      operationId: borraMesa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa a eliminar.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mesa eliminada correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Mesa eliminada exitosamente."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /mesas/{id}/imprimir:
+    post:
+      summary: Imprimir mesa
+      description: Inicia el proceso de impresión de la mesa.
+      operationId: imprimeMesa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa a imprimir.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Proceso de impresión iniciado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Impresión iniciada."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /mesas/{id}/tpv:
+    post:
+      summary: Pasar mesa al TPV
+      description: Envía la mesa al sistema TPV.
+      operationId: cobraMesaTPV
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa para pasar al TPV.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Mesa enviada al TPV correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Mesa enviada al TPV."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string                    
 components:
   schemas:
     Mesas:

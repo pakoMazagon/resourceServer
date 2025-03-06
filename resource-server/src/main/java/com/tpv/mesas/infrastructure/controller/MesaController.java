@@ -3,14 +3,18 @@ package com.tpv.mesas.infrastructure.controller;
 import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import com.tpv.mesas.infrastructure.controller.mapper.MesaMapper;
+import com.tpv.mesas.infrastructure.dto.CambiaNombreMesa200ResponseDTO;
+import com.tpv.mesas.infrastructure.dto.CambiaNombreMesaRequestDTO;
 import com.tpv.mesas.infrastructure.dto.MesasDTO;
 import com.tpv.mesas.infrastructure.dto.UpdateMesa200ResponseDTO;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,6 +53,18 @@ public class MesaController implements MesasApi {
 
         final UpdateMesa200ResponseDTO bodyDev = new UpdateMesa200ResponseDTO();
         bodyDev.setMessage(String.format("Mesa {} modificada ocupada {} por camarero{}", mesasDTO.getNombre(), mesasDTO.getOcupada(), mesasDTO.getCamarero()));
+        return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+    }
+
+    @Override
+    public ResponseEntity<CambiaNombreMesa200ResponseDTO> cambiaNombreMesa(
+            @Parameter(name = "id", description = "ID de la mesa a renombrar.", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+            @Parameter(name = "CambiaNombreMesaRequestDTO", description = "", required = true) @Valid @RequestBody CambiaNombreMesaRequestDTO cambiaNombreMesaRequestDTO
+    ) {
+        this.mesasCU.cambiaNombreMesa(id, cambiaNombreMesaRequestDTO.getNombre());
+
+        final CambiaNombreMesa200ResponseDTO bodyDev = new CambiaNombreMesa200ResponseDTO();
+        bodyDev.setMessage(String.format("Mesa id {} cambia de nombre {} por camarero{}", id, cambiaNombreMesaRequestDTO.getNombre()));
         return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
     }
 }

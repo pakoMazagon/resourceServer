@@ -124,6 +124,15 @@ public class MesasCUImpl implements MesasCU {
         return mesaServida;
     }
 
+    @Override
+    public MesaServida cambiaNombreMesa(String id, String nuevoNombre) {
+        final MesaServida mesaServida = this.mesaServidaPort.obtenerPorId(id);
+        mesaServida.setNombre(nuevoNombre);
+        this.mesaServidaPort.update(mesaServida);
+        this.mesasWSPort.notifyMesaUpdate(mesaServida);
+        return mesaServida;
+    }
+
     private static void agregarMesasNoActivas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasActivas) {
         final Set<String> idsMesasServidas = listMesasServidasActivas.stream()
                 .map(MesaServida::getMesaReferencia) // Asumiendo que 'mesaReferencia' es el ID en MesaServida

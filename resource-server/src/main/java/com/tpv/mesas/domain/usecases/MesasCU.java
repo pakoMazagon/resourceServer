@@ -10,4 +10,6 @@ public interface MesasCU {
     MesaServida actualizarMesa(MesaServida mesa);
 
     MesaServida obtenerMesaServidaPorId(String id);
+
+    MesaServida cambiaNombreMesa(String id, String nuevoNombre);
 }
