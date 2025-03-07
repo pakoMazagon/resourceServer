@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProductoUC {
     List<Producto> obtenerTodosLosProductos();
+
+    void cambiarEstadoProductoEnMesa(String id, String nuevoEstado);
 }
