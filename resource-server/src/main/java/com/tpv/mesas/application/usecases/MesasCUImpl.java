@@ -126,7 +126,7 @@ public class MesasCUImpl implements MesasCU {
 
     @Override
     public MesaServida cambiaNombreMesa(String id, String nuevoNombre) {
-        final MesaServida mesaServida = this.mesaServidaPort.obtenerPorId(id);
+        final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
         mesaServida.setNombre(nuevoNombre);
         this.mesaServidaPort.update(mesaServida);
         this.mesasWSPort.notifyMesaUpdate(mesaServida);
