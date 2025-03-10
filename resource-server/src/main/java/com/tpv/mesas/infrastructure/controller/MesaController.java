@@ -3,10 +3,7 @@ package com.tpv.mesas.infrastructure.controller;
 import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import com.tpv.mesas.infrastructure.controller.mapper.MesaMapper;
-import com.tpv.mesas.infrastructure.dto.CambiaNombreMesa200ResponseDTO;
-import com.tpv.mesas.infrastructure.dto.CambiaNombreMesaRequestDTO;
-import com.tpv.mesas.infrastructure.dto.MesasDTO;
-import com.tpv.mesas.infrastructure.dto.UpdateMesa200ResponseDTO;
+import com.tpv.mesas.infrastructure.dto.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import jakarta.validation.Valid;
@@ -65,6 +62,17 @@ public class MesaController implements MesasApi {
 
         final CambiaNombreMesa200ResponseDTO bodyDev = new CambiaNombreMesa200ResponseDTO();
         bodyDev.setMessage(String.format("Mesa id {} cambia de nombre {} por camarero{}", id, cambiaNombreMesaRequestDTO.getNombre()));
+        return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+    }
+
+    @Override
+    public ResponseEntity<BorraMesa200ResponseDTO> borraMesa(
+            @Parameter(name = "id", description = "ID de la mesa a eliminar.", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
+    ) {
+        this.mesasCU.eliminar(id);
+
+        final BorraMesa200ResponseDTO bodyDev = new BorraMesa200ResponseDTO();
+        bodyDev.setMessage(String.format("Mesa id {} borrada{}", id));
         return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
     }
 }

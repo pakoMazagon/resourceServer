@@ -10,7 +10,6 @@ import org.mapstruct.*;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Mapper(collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, componentModel = "spring", nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface MesaMapper {
@@ -18,18 +17,12 @@ public interface MesaMapper {
     MesasDTO mapToMesaDTO(Mesa mesa);
 
     @Mapping(target = "lastUpdatedAt", source = "lastUpdatedAt", qualifiedByName = "mapToOffsetDateTime")
-    @Mapping(target = "ocupada", source = "id", qualifiedByName = "mapIdToOcupada")
     MesasDTO mapToMesaDTO(MesaServida mesaServida);
 
     @Mapping(target = "fechaHoraCreacion", source = "fechaHoraCreacion", qualifiedByName = "mapToOffsetDateTime")
     @Mapping(target = "fechaHoraPedido", source = "fechaHoraPedido", qualifiedByName = "mapToOffsetDateTime")
     @Mapping(target = "fechaHoraServido", source = "fechaHoraServido", qualifiedByName = "mapToOffsetDateTime")
     ProductoEnMesaDTO mapToProductoEnMesaDTO(ProductoMesa productoMesa);
-
-    @Named("mapIdToOcupada")
-    default boolean mapIdToOcupada(UUID id) {
-        return id != null;
-    }
 
     @Mapping(target = "lastUpdatedAt", source = "lastUpdatedAt", qualifiedByName = "mapToLocalDateTime")
     Mesa mapToMesa(MesasDTO mesaDTO);

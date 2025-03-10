@@ -41,6 +41,9 @@ public class MesaServida {
     @Transient
     private List<ProductoMesa> products;
 
+    @Transient
+    private Boolean ocupada;
+
     @Version
     private int version;
     private LocalDateTime lastUpdatedAt;
@@ -60,6 +63,7 @@ public class MesaServida {
                 .fechaInicio(LocalDateTime.now())
                 .arqueada(false)
                 .activa(true)
+                .ocupada(true)
                 .borrada(false)
                 .estado(EstadoMesaEnum.POR_COGER_COMANDA)
                 .products(new ArrayList<>())
@@ -67,5 +71,22 @@ public class MesaServida {
                 .lastUpdatedBy("InicioMesa")
                 .lastUpdatedAt(LocalDateTime.now())
                 .build();
+    }
+
+    public void borrarMesa() {
+        this.setCamarero("");
+        this.setBorrada(true);
+        this.setLastUpdatedAt(LocalDateTime.now());
+        this.setFechaFin(LocalDateTime.now());
+        this.setActiva(false);
+        this.setOcupada(false);
+    }
+
+    public void getLibre() {
+//        this.setId(null);
+        this.setFechaInicio(null);
+        this.setEstado(null);
+        this.setActiva(false); // Activa en false si así lo deseas
+        this.setOcupada(false);
     }
 }

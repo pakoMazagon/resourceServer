@@ -12,4 +12,6 @@ public interface MesasCU {
     MesaServida obtenerMesaServidaPorId(String id);
 
     MesaServida cambiaNombreMesa(String id, String nuevoNombre);
+
+    void eliminar(String id);
 }

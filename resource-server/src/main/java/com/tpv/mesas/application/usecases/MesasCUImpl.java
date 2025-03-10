@@ -133,6 +133,19 @@ public class MesasCUImpl implements MesasCU {
         return mesaServida;
     }
 
+    @Override
+    public void eliminar(String id) {
+        final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
+        mesaServida.borrarMesa();
+        this.mesaServidaPort.update(mesaServida);
+        final Mesa mesaMaestra = this.mesaPort.obtenerPorId(UUID.fromString(mesaServida.getMesaReferencia())).get();
+        mesaMaestra.liberar();
+        this.mesaPort.actualizarMesa(mesaMaestra);
+        final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra);
+        mesaServidaDev.getLibre();
+        this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
+    }
+
     private static void agregarMesasNoActivas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasActivas) {
         final Set<String> idsMesasServidas = listMesasServidasActivas.stream()
                 .map(MesaServida::getMesaReferencia) // Asumiendo que 'mesaReferencia' es el ID en MesaServida
@@ -141,10 +154,7 @@ public class MesasCUImpl implements MesasCU {
                 .filter(mesa -> !idsMesasServidas.contains(mesa.getId().toString())) // Si no está ocupada
                 .forEach(mesa -> {
                     final MesaServida nuevaMesaServida = MesaServida.initFromMesa(mesa);
-                    nuevaMesaServida.setId(null);
-                    nuevaMesaServida.setFechaInicio(null);
-                    nuevaMesaServida.setEstado(null);
-                    nuevaMesaServida.setActiva(false); // Activa en false si así lo deseas
+                    nuevaMesaServida.getLibre();
                     listMesasServidasActivas.add(nuevaMesaServida);
                 });
     }
@@ -153,6 +163,7 @@ public class MesasCUImpl implements MesasCU {
         final List<MesaServida> listMesasServidasActivas = this.mesaServidaPort.obtenerActivas();
         listMesasServidasActivas.forEach(mesaServidaActiva -> {
             mesaServidaActiva.setProducts(this.productoMesaPort.findByMesaServidaRef(mesaServidaActiva.getId().toString()));
+            mesaServidaActiva.setOcupada(true);
         });
         return listMesasServidasActivas;
     }

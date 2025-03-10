@@ -37,4 +37,13 @@ public class Mesa {
         this.cantidad = mesaServida.getCantidad();
         this.lastUpdatedAt = LocalDateTime.now();
     }
+
+    public void liberar() {
+        this.camarero = "";
+        this.lastUpdatedAt = LocalDateTime.now();
+        this.ocupada = false;
+        this.cantidad = 0.0;
+        this.nombreActual = this.nombreTradicional;
+
+    }
 }
