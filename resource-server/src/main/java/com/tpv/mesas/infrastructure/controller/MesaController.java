@@ -1,6 +1,7 @@
 package com.tpv.mesas.infrastructure.controller;
 
 import com.tpv.mesas.domain.entities.MesaServida;
+import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import com.tpv.mesas.infrastructure.controller.mapper.MesaMapper;
 import com.tpv.mesas.infrastructure.dto.*;
@@ -74,5 +75,17 @@ public class MesaController implements MesasApi {
         final BorraMesa200ResponseDTO bodyDev = new BorraMesa200ResponseDTO();
         bodyDev.setMessage(String.format("Mesa id {} borrada{}", id));
         return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+    }
+
+    @Override
+    public ResponseEntity<CobraMesa200ResponseDTO> cobraMesa(
+            @Parameter(name = "CobraMesaRequestDTO", description = "", required = true) @Valid @RequestBody CobraMesaRequestDTO cobraMesaRequestDTO
+    ) {
+        this.mesasCU.cobrar(cobraMesaRequestDTO.getId(), MetodoPagoEnum.valueOf(cobraMesaRequestDTO.getTipoPago().getValue()));
+
+        final CobraMesa200ResponseDTO bodyDev = new CobraMesa200ResponseDTO();
+        bodyDev.setMessage(String.format("Mesa id {} cobrada{}", cobraMesaRequestDTO.getId()));
+        return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+
     }
 }

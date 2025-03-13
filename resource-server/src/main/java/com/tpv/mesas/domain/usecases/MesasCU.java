@@ -1,6 +1,7 @@
 package com.tpv.mesas.domain.usecases;
 
 import com.tpv.mesas.domain.entities.MesaServida;
+import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface MesasCU {
     MesaServida cambiaNombreMesa(String id, String nuevoNombre);
 
     void eliminar(String id);
+
+    void cobrar(String id, MetodoPagoEnum metodoPago);
 }

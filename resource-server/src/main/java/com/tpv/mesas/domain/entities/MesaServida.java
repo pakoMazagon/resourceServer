@@ -50,7 +50,7 @@ public class MesaServida {
     private String lastUpdatedBy;
 
 
-    public static MesaServida initFromMesa(Mesa mesa) {
+    public static MesaServida initFromMesa(Mesa mesa, boolean ocupar) {
         return MesaServida.builder()
                 .id(UUID.randomUUID())
                 .mesaReferencia(mesa.getId().toString())
@@ -63,7 +63,7 @@ public class MesaServida {
                 .fechaInicio(LocalDateTime.now())
                 .arqueada(false)
                 .activa(true)
-                .ocupada(true)
+                .ocupada(ocupar)
                 .borrada(false)
                 .estado(EstadoMesaEnum.POR_COGER_COMANDA)
                 .products(new ArrayList<>())
@@ -74,7 +74,6 @@ public class MesaServida {
     }
 
     public void borrarMesa() {
-        this.setCamarero("");
         this.setBorrada(true);
         this.setLastUpdatedAt(LocalDateTime.now());
         this.setFechaFin(LocalDateTime.now());
@@ -82,11 +81,20 @@ public class MesaServida {
         this.setOcupada(false);
     }
 
-    public void getLibre() {
+    public void liberarMesaServida() {
 //        this.setId(null);
-        this.setFechaInicio(null);
-        this.setEstado(null);
         this.setActiva(false); // Activa en false si así lo deseas
         this.setOcupada(false);
+    }
+
+    public void cobrarMesa(MetodoPagoEnum metodoPago) {
+        this.setFechaFin(LocalDateTime.now());
+        this.setLastUpdatedAt(LocalDateTime.now());
+        this.setEstado(EstadoMesaEnum.COBRADA);
+        this.setMetodoPago(metodoPago);
+        this.setBorrada(false);
+        this.setActiva(false);
+        this.setOcupada(false);
+        this.setArqueada(false);
     }
 }

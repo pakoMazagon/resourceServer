@@ -97,48 +97,7 @@ paths:
                   error:
                     type: string
                     description: Descripción del error.
-                    example: "Ocurrió un error inesperado."
-  /mesas/{id}/efectivo:
-    post:
-      summary: Cobrar mesa
-      description: Realiza el cobro de la mesa y finaliza la transacción.
-      operationId: cobraMesaEfectivo
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID de la mesa a cobrar.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: La mesa fue cobrada correctamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Mesa cobrada exitosamente."
-        '400':
-          description: Solicitud inválida.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '500':
-          description: Error interno del servidor.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                    example: "Ocurrió un error inesperado."  
 
   /mesas/{id}/nombre:
     patch:
@@ -276,21 +235,30 @@ paths:
                   error:
                     type: string
 
-  /mesas/{id}/tpv:
+  /mesas/cobrar:
     post:
-      summary: Pasar mesa al TPV
-      description: Envía la mesa al sistema TPV.
-      operationId: cobraMesaTPV
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID de la mesa para pasar al TPV.
-          schema:
-            type: string
+      summary: Cobrar mesa
+      description: Realiza el cobro de una mesa y finaliza la transacción.
+      operationId: cobraMesa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ID de la mesa a cobrar.
+                  example: "123e4567-e89b-12d3-a456-426614174000"
+                tipoPago:
+                  type: string
+                  enum: [ CASH, TPV ]
+                  description: Método de pago utilizado.
+                  example: "TPV"
       responses:
         '200':
-          description: Mesa enviada al TPV correctamente.
+          description: La mesa fue cobrada correctamente.
           content:
             application/json:
               schema:
@@ -298,7 +266,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Mesa enviada al TPV."
+                    example: "Mesa cobrada exitosamente."
         '400':
           description: Solicitud inválida.
           content:
@@ -308,6 +276,7 @@ paths:
                 properties:
                   error:
                     type: string
+                    example: "ID de mesa inválido."
         '500':
           description: Error interno del servidor.
           content:
@@ -316,7 +285,9 @@ paths:
                 type: object
                 properties:
                   error:
-                    type: string                    
+                    type: string
+                    example: "Error inesperado al cobrar la mesa."
+
 components:
   schemas:
     Mesas:

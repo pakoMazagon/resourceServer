@@ -39,7 +39,7 @@ public class Mesa {
     }
 
     public void liberar() {
-        this.camarero = "";
+        this.camarero = null;
         this.lastUpdatedAt = LocalDateTime.now();
         this.ocupada = false;
         this.cantidad = 0.0;

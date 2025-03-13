@@ -7,6 +7,7 @@ import com.tpv.mesas.application.ports.ProductoMesaPort;
 import com.tpv.mesas.domain.entities.Mesa;
 import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.entities.ProductoMesa;
+import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,7 @@ public class MesasCUImpl implements MesasCU {
     public MesaServida actualizarMesa(MesaServida mesaServida) {
 
         final MesaServida mesaServidaBBDD = this.extraerOModificarMesaServida(mesaServida);
+        mesaServidaBBDD.setOcupada(true);
         final List<ProductoMesa> productos = Optional.ofNullable(mesaServida.getProducts()).orElse(new ArrayList<>());
         final double cantidadTotal = this.actualizarProductosEnMesa(productos);
         final List<ProductoMesa> productosInBBDD = this.productoMesaPort.findByMesaServidaRef(mesaServidaBBDD.getId().toString());
@@ -105,7 +107,7 @@ public class MesasCUImpl implements MesasCU {
                         m.completeFromMesaServida(mesaServida);
                         this.mesaPort.actualizarMesa(m);
                     });
-                    return mesaBBDD.map(MesaServida::initFromMesa)
+                    return mesaBBDD.map(m -> MesaServida.initFromMesa(m, true))
                             .map(m -> {
                                 this.mesaServidaPort.crearMesaServida(m);
                                 return m;
@@ -141,8 +143,20 @@ public class MesasCUImpl implements MesasCU {
         final Mesa mesaMaestra = this.mesaPort.obtenerPorId(UUID.fromString(mesaServida.getMesaReferencia())).get();
         mesaMaestra.liberar();
         this.mesaPort.actualizarMesa(mesaMaestra);
-        final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra);
-        mesaServidaDev.getLibre();
+        final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra, false);
+        mesaServidaDev.liberarMesaServida();
+        this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
+    }
+
+    @Override
+    public void cobrar(String id, MetodoPagoEnum metodoPago) {
+        final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
+        mesaServida.cobrarMesa(metodoPago);
+        this.mesaServidaPort.update(mesaServida);
+        final Mesa mesaMaestra = this.mesaPort.obtenerPorId(UUID.fromString(mesaServida.getMesaReferencia())).get();
+        mesaMaestra.liberar();
+        this.mesaPort.actualizarMesa(mesaMaestra);
+        final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra, false);
         this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
     }
 
@@ -153,8 +167,8 @@ public class MesasCUImpl implements MesasCU {
         listMesasMaestras.stream()
                 .filter(mesa -> !idsMesasServidas.contains(mesa.getId().toString())) // Si no está ocupada
                 .forEach(mesa -> {
-                    final MesaServida nuevaMesaServida = MesaServida.initFromMesa(mesa);
-                    nuevaMesaServida.getLibre();
+                    final MesaServida nuevaMesaServida = MesaServida.initFromMesa(mesa, false);
+                    nuevaMesaServida.liberarMesaServida();
                     listMesasServidasActivas.add(nuevaMesaServida);
                 });
     }
