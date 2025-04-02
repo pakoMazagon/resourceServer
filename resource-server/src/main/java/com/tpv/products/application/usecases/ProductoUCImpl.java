@@ -49,6 +49,7 @@ public class ProductoUCImpl implements ProductoUC {
         this.productoMesaPort.createOrUpdate(prodMesa);
         //aqui deberia ir al WS de cocina
         final MesaServida mesaServida = this.mesaServidaPort.obtenerPorId(prodMesa.getMesaReferencia());
+        mesaServida.setOcupada(true);
         mesaServida.setProducts(this.productoMesaPort.findByMesaServidaRef(prodMesa.getMesaReferencia()));
         this.mesasWSPort.notifyMesaUpdate(mesaServida);
     }
