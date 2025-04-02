@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="create-table-mesa-servida" author="tpv">
+        <createTable tableName="mesa_servida">
+            <column name="id" type="UUID" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mesa_referencia" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sector" type="VARCHAR(50)"/>
+            <column name="nombre" type="VARCHAR(100)"/>
+            <column name="camarero" type="VARCHAR(100)"/>
+            <column name="cantidad" type="DECIMAL(10,2)"/>
+            <column name="fecha_inicio" type="TIMESTAMP"/>
+            <column name="fecha_fin" type="TIMESTAMP"/>
+            <column name="arqueada" type="BOOLEAN" defaultValue="false"/>
+            <column name="activa" type="BOOLEAN" defaultValue="false"/>
+            <column name="estado" type="VARCHAR(20)"/>
+            <column name="metodo_pago" type="VARCHAR(20)"/>
+            <column name="borrada" type="BOOLEAN" defaultValue="false"/>
+            <column name="ocupada" type="BOOLEAN" defaultValue="false"/>
+            <column name="version" type="INTEGER" defaultValue="0"/>
+            <column name="last_updated_at" type="TIMESTAMP"/>
+            <column name="last_updated_by" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

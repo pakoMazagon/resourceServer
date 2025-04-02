@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="insert-test-data-mesa-servida" author="tpv">
+        <insert tableName="mesa_servida">
+            <column name="id" value="7e57d004-2b97-11eb-adc1-0242ac120002"/>
+            <column name="mesa_referencia" value="MESA-01"/>
+            <column name="numero" value="1"/>
+            <column name="sector" value="TERRAZA"/>
+            <column name="nombre" value="Mesa Terraza 1"/>
+            <column name="camarero" value="Juan Pérez"/>
+            <column name="cantidad" value="125.50"/>
+            <column name="fecha_inicio" value="2023-05-15T12:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="true"/>
+            <column name="estado" value="POR_COGER_COMANDA"/>
+            <column name="ocupada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="8e57d004-2b97-11eb-adc1-0242ac120002"/>
+            <column name="mesa_referencia" value="MESA-02"/>
+            <column name="numero" value="2"/>
+            <column name="sector" value="INTERIOR"/>
+            <column name="nombre" value="Mesa Interior 2"/>
+            <column name="camarero" value="Ana López"/>
+            <column name="cantidad" value="85.75"/>
+            <column name="fecha_inicio" value="2023-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T15:30:00"/>
+            <column name="arqueada" value="true"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+        </insert>
+
+        <!-- Más datos según necesites -->
+    </changeSet>
+</databaseChangeLog>
