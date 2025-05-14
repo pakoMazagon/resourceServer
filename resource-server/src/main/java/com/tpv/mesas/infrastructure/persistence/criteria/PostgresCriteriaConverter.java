@@ -1,9 +1,11 @@
 package com.tpv.mesas.infrastructure.persistence.criteria;
 
 import com.tpv.mesas.domain.criteria.criteria.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Component
 public class PostgresCriteriaConverter {
     // Mapeo de operadores de Criteria a PostgreSQL
     private static final Map<FilterOperator.Operator, String> OPERATOR_MAP = Map.of(

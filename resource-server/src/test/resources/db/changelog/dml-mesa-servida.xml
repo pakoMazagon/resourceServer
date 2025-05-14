@@ -10,32 +10,198 @@
             <column name="id" value="7e57d004-2b97-11eb-adc1-0242ac120002"/>
             <column name="mesa_referencia" value="MESA-01"/>
             <column name="numero" value="1"/>
-            <column name="sector" value="TERRAZA"/>
+            <column name="sector" value="terraza"/>
             <column name="nombre" value="Mesa Terraza 1"/>
-            <column name="camarero" value="Juan Pérez"/>
+            <column name="camarero" value="Paco"/>
             <column name="cantidad" value="125.50"/>
-            <column name="fecha_inicio" value="2023-05-15T12:30:00"/>
+            <column name="fecha_inicio" value="2025-02-15T14:30:00"/>
+            <column name="fecha_fin" value="2025-02-15T15:30:00"/>
             <column name="arqueada" value="false"/>
-            <column name="activa" value="true"/>
-            <column name="estado" value="POR_COGER_COMANDA"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="CASH"/>
             <column name="ocupada" value="true"/>
+            <column name="borrada" value="true"/>
         </insert>
 
         <insert tableName="mesa_servida">
             <column name="id" value="8e57d004-2b97-11eb-adc1-0242ac120002"/>
             <column name="mesa_referencia" value="MESA-02"/>
             <column name="numero" value="2"/>
-            <column name="sector" value="INTERIOR"/>
+            <column name="sector" value="salonComedor"/>
             <column name="nombre" value="Mesa Interior 2"/>
-            <column name="camarero" value="Ana López"/>
+            <column name="camarero" value="Chato"/>
             <column name="cantidad" value="85.75"/>
-            <column name="fecha_inicio" value="2023-05-15T13:15:00"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
             <column name="fecha_fin" value="2023-05-15T15:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0001-0001-0001-0001-000000000001"/>
+            <column name="mesa_referencia" value="MESA-03"/>
+            <column name="numero" value="3"/>
+            <column name="sector" value="salonComedor"/>
+            <column name="nombre" value="Mesa Interior 2"/>
+            <column name="camarero" value="Chato"/>
+            <column name="cantidad" value="85.75"/>
+            <column name="fecha_inicio" value="2025-05-15T14:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0002-0002-0002-0002-000000000002"/>
+            <column name="mesa_referencia" value="MESA-04"/>
+            <column name="numero" value="4"/>
+            <column name="sector" value="barra"/>
+            <column name="nombre" value="Mesa Interior 2"/>
+            <column name="camarero" value="Lolo"/>
+            <column name="cantidad" value="135.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T17:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0003-0003-0003-0003-000000000003"/>
+            <column name="mesa_referencia" value="MESA-05"/>
+            <column name="numero" value="5"/>
+            <column name="sector" value="salonComedor"/>
+            <column name="nombre" value="Mesa Interior 2"/>
+            <column name="camarero" value="Chato"/>
+            <column name="cantidad" value="585.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T17:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0004-0004-0004-0004-000000000004"/>
+            <column name="mesa_referencia" value="MESA-06"/>
+            <column name="numero" value="6"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Francisco"/>
+            <column name="cantidad" value="185.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0005-0005-0005-0005-000000000005"/>
+            <column name="mesa_referencia" value="MESA-07"/>
+            <column name="numero" value="7"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Paco"/>
+            <column name="cantidad" value="65.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0006-0006-0006-0006-000000000006"/>
+            <column name="mesa_referencia" value="MESA-08"/>
+            <column name="numero" value="8"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Paco"/>
+            <column name="cantidad" value="285.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0007-0007-0007-0007-000000000007"/>
+            <column name="mesa_referencia" value="MESA-09"/>
+            <column name="numero" value="9"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Paco"/>
+            <column name="cantidad" value="585.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
             <column name="arqueada" value="true"/>
             <column name="activa" value="false"/>
             <column name="estado" value="COBRADA"/>
             <column name="metodo_pago" value="TPV"/>
             <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0008-0008-0008-0008-000000000008"/>
+            <column name="mesa_referencia" value="MESA-10"/>
+            <column name="numero" value="10"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Paco"/>
+            <column name="cantidad" value="185.75"/>
+            <column name="fecha_inicio" value="2025-05-15T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-15T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
+        </insert>
+
+        <insert tableName="mesa_servida">
+            <column name="id" value="1e1e0009-0009-0009-0009-000000000009"/>
+            <column name="mesa_referencia" value="MESA-11"/>
+            <column name="numero" value="11"/>
+            <column name="sector" value="terraza"/>
+            <column name="nombre" value="Mesa 2"/>
+            <column name="camarero" value="Paco"/>
+            <column name="cantidad" value="385.75"/>
+            <column name="fecha_inicio" value="2025-05-16T13:15:00"/>
+            <column name="fecha_fin" value="2023-05-16T16:30:00"/>
+            <column name="arqueada" value="false"/>
+            <column name="activa" value="false"/>
+            <column name="estado" value="COBRADA"/>
+            <column name="metodo_pago" value="TPV"/>
+            <column name="ocupada" value="false"/>
+            <column name="borrada" value="true"/>
         </insert>
 
         <!-- Más datos según necesites -->

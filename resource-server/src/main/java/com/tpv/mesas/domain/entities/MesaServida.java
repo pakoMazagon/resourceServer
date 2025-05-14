@@ -2,10 +2,7 @@ package com.tpv.mesas.domain.entities;
 
 import com.tpv.mesas.domain.entities.enums.EstadoMesaEnum;
 import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +31,9 @@ public class MesaServida {
     private LocalDateTime fechaFin; // cuando se cobra
     private Boolean arqueada; // cuando se marque que ha pasado ultimo arqueo
     private Boolean activa; // marcar activa hasta que se cobre. Tan solo puede haber una activa por mesa maestra
+    @Enumerated(EnumType.STRING)
     private EstadoMesaEnum estado;
+    @Enumerated(EnumType.STRING)
     private MetodoPagoEnum metodoPago; //cash o tpv
     private Boolean borrada; // si se ha mandado a borrar
 
@@ -79,6 +78,7 @@ public class MesaServida {
         this.setFechaFin(LocalDateTime.now());
         this.setActiva(false);
         this.setOcupada(false);
+        this.setEstado(EstadoMesaEnum.BORRADA);
     }
 
     public void liberarMesaServida() {
@@ -96,5 +96,10 @@ public class MesaServida {
         this.setActiva(false);
         this.setOcupada(false);
         this.setArqueada(false);
+    }
+
+    public Boolean mesaOcupada() {
+        final List<EstadoMesaEnum> estadosNoOcupados = List.of(EstadoMesaEnum.COBRADA, EstadoMesaEnum.ARQUEADA, EstadoMesaEnum.BORRADA);
+        return !estadosNoOcupados.contains(this.estado);
     }
 }

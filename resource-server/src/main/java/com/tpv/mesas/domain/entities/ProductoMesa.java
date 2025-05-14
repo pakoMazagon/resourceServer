@@ -1,10 +1,7 @@
 package com.tpv.mesas.domain.entities;
 
 import com.tpv.mesas.domain.entities.enums.EstadoProductoEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +25,7 @@ public class ProductoMesa {
     private Double precio;
     private String nombre;
     private String code;
+    @Enumerated(EnumType.STRING)
     private EstadoProductoEnum estado;
     private LocalDateTime fechaHoraCreacion;
     private LocalDateTime fechaHoraPedido;

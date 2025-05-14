@@ -220,6 +220,36 @@
 							</configOptions>
 						</configuration>
 					</execution>
+					<!-- GENERATE ARQUEO API -->
+					<execution>
+						<id>generate-arqueo-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>src/main/resources/openapi_arqueo.yml</inputSpec>
+							<generatorName>spring</generatorName>
+							<!--							<modelPackage></modelPackage>-->
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<skipOperationExample>true</skipOperationExample>
+							<!--							<generateApis>false</generateApis>-->
+							<generateModelTests>false</generateModelTests>
+							<generateApiTests>false</generateApiTests>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<library>spring-boot</library>
+							<modelPackage>com.tpv.mesas.infrastructure.dto</modelPackage>
+							<apiPackage>com.tpv.mesas.infrastructure.controller</apiPackage>
+							<configOptions>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<useOptional>true</useOptional>
+								<serializableModel>true</serializableModel>
+								<useSpringBoot3>true</useSpringBoot3>
+								<interfaceOnly>true</interfaceOnly>
+								<useLombok>true</useLombok>
+							</configOptions>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>

@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: TPV Arqueo API
+  version: 1.0.0
+paths:
+  /arqueo/buscar:
+    post:
+      summary: Buscar mesas servidas según filtros patron Criteria
+      description: Devuelve listado mesas  utilizando patron criteria.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                      operator:
+                        type: string
+                      value:
+                        type: string
+                sortField:
+                  type: string
+                sortDirection:
+                  type: string
+                limit:
+                  type: integer
+                offset:
+                  type: integer
+      responses:
+        '200':
+          description: Mesa solicitada.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MesaServida'
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Parámetro 'id' es requerido."
+
+components:
+  schemas:
+    MesaServida:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        mesaReferencia:
+          type: string
+          format: uuid
+        numero:
+          type: integer
+        sector:
+          type: string
+        nombre:
+          type: string
+        ocupada:
+          type: boolean
+        camarero:
+          type: string
+        cantidad:
+          type: number
+          format: double
+        fechaInicio:
+          type: string
+          format: date-time
+        fechaFin:
+          type: string
+          format: date-time
+        arqueada:
+          type: boolean
+        activa:
+          type: boolean
+        estado:
+          type: string
+        metodoPago:
+          type: string
+        borrada:
+          type: boolean
+        lastUpdatedAt:
+          type: string
+          format: date-time
+        lastUpdatedBy:
+          type: string

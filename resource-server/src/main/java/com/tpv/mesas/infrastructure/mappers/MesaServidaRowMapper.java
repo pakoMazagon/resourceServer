@@ -15,6 +15,8 @@ public class MesaServidaRowMapper implements RowMapper<MesaServida> {
 
     @Override
     public MesaServida mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+        final Boolean ocupada = MesaServida.builder().estado(EstadoMesaEnum.valueOf(rs.getString("estado"))).build().mesaOcupada();
         return MesaServida.builder()
                 .id(UUID.fromString(rs.getString("id")))
                 .mesaReferencia(rs.getString("mesa_referencia"))
@@ -33,7 +35,7 @@ public class MesaServidaRowMapper implements RowMapper<MesaServida> {
                 .metodoPago(rs.getString("metodo_pago") != null ?
                         MetodoPagoEnum.valueOf(rs.getString("metodo_pago")) : null)
                 .borrada(rs.getBoolean("borrada"))
-                .ocupada(rs.getBoolean("ocupada"))
+                .ocupada(ocupada)
                 .version(rs.getInt("version"))
                 .lastUpdatedAt(rs.getTimestamp("last_updated_at") != null ?
                         rs.getTimestamp("last_updated_at").toLocalDateTime() : null)
