@@ -30,7 +30,6 @@ public class MesaServida {
     private LocalDateTime fechaInicio; // cuando se añade el primer producto
     private LocalDateTime fechaFin; // cuando se cobra
     private Boolean arqueada; // cuando se marque que ha pasado ultimo arqueo
-    private Boolean activa; // marcar activa hasta que se cobre. Tan solo puede haber una activa por mesa maestra
     @Enumerated(EnumType.STRING)
     private EstadoMesaEnum estado;
     @Enumerated(EnumType.STRING)
@@ -40,8 +39,7 @@ public class MesaServida {
     @Transient
     private List<ProductoMesa> products;
 
-    @Transient
-    private Boolean ocupada;
+    private Boolean ocupada; // marcar ocupada hasta que se cobre. Tan solo puede haber una ocupada por mesa maestra
 
     @Version
     private int version;
@@ -58,10 +56,9 @@ public class MesaServida {
                 .nombre(mesa.getNombreActual().isEmpty() ? mesa.getNombreTradicional() : mesa.getNombreActual())
                 .camarero(mesa.getCamarero())
                 .cantidad(0.0)
-                .camarero(mesa.getCamarero())
+                .camarero(ocupar ? mesa.getCamarero() : null)
                 .fechaInicio(LocalDateTime.now())
                 .arqueada(false)
-                .activa(true)
                 .ocupada(ocupar)
                 .borrada(false)
                 .estado(EstadoMesaEnum.POR_COGER_COMANDA)
@@ -76,15 +73,12 @@ public class MesaServida {
         this.setBorrada(true);
         this.setLastUpdatedAt(LocalDateTime.now());
         this.setFechaFin(LocalDateTime.now());
-        this.setActiva(false);
         this.setOcupada(false);
         this.setEstado(EstadoMesaEnum.BORRADA);
     }
 
     public void liberarMesaServida() {
-//        this.setId(null);
-        this.setActiva(false); // Activa en false si así lo deseas
-        this.setOcupada(false);
+        this.setOcupada(false); // Ocupada en false si así lo deseas
     }
 
     public void cobrarMesa(MetodoPagoEnum metodoPago) {
@@ -93,9 +87,21 @@ public class MesaServida {
         this.setEstado(EstadoMesaEnum.COBRADA);
         this.setMetodoPago(metodoPago);
         this.setBorrada(false);
-        this.setActiva(false);
         this.setOcupada(false);
         this.setArqueada(false);
+    }
+
+    public void arquearMesa(String camarero) {
+        if (!this.estado.equals(EstadoMesaEnum.COBRADA)) {
+            this.setFechaFin(LocalDateTime.now());
+            this.setMetodoPago(MetodoPagoEnum.POR_ARQUEO);
+            this.setLastUpdatedBy(camarero);
+        }
+        this.setEstado(EstadoMesaEnum.ARQUEADA);
+        this.setLastUpdatedAt(LocalDateTime.now());
+        this.setBorrada(false);
+        this.setOcupada(false);
+        this.setArqueada(true);
     }
 
     public Boolean mesaOcupada() {

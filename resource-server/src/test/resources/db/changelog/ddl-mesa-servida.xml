@@ -23,7 +23,6 @@
             <column name="fecha_inicio" type="TIMESTAMP"/>
             <column name="fecha_fin" type="TIMESTAMP"/>
             <column name="arqueada" type="BOOLEAN" defaultValue="false"/>
-            <column name="activa" type="BOOLEAN" defaultValue="false"/>
             <column name="estado" type="VARCHAR(20)"/>
             <column name="metodo_pago" type="VARCHAR(20)"/>
             <column name="borrada" type="BOOLEAN" defaultValue="false"/>

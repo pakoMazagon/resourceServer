@@ -42,6 +42,7 @@ public class JpaCriteriaConverter {
             case LT -> cb.lessThan(field, value);
             case CONTAINS -> cb.like(field, "%" + value + "%");
             case NOT_CONTAINS -> cb.notLike(field, "%" + value + "%");
+            case IN -> cb.in(field);
             default -> throw new IllegalArgumentException("Invalid operator");
         };
     }

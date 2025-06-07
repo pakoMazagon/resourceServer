@@ -10,8 +10,12 @@ public class FilterOperator extends EnumValueObject<FilterOperator.Operator> {
         NOT_EQUAL("!="),
         GT(">"),
         LT("<"),
+        GT_OR_EQ(">="),
+        LT_OR_EQ("<="),
         CONTAINS("CONTAINS"),
-        NOT_CONTAINS("NOT_CONTAINS");
+        NOT_CONTAINS("NOT_CONTAINS"),
+
+        IN("IN");
 
         private final String symbol;
 
@@ -64,6 +68,9 @@ public class FilterOperator extends EnumValueObject<FilterOperator.Operator> {
             case NOT_EQUAL -> "<>";
             case GT -> ">";
             case LT -> "<";
+            case GT_OR_EQ -> ">=";
+            case LT_OR_EQ -> "<=";
+            case IN -> "IN";
         };
     }
 }

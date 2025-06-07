@@ -33,14 +33,14 @@ public class MesasCUImpl implements MesasCU {
 
     @Override
     public List<MesaServida> obtenerTodas() {
-        final List<MesaServida> listMesasServidasActivas = this.obtenerMesasActivasConProductos();
+        final List<MesaServida> listMesasServidasOcupadas = this.obtenerMesasOcupadasConProductos();
         final List<Mesa> listMesasMaestras = this.mesaPort.obtenerTodas();
 
 
-        agregarMesasNoActivas(listMesasMaestras, listMesasServidasActivas);
+        agregarMesasNoOcupadas(listMesasMaestras, listMesasServidasOcupadas);
 
         // Devolver la lista completa
-        return listMesasServidasActivas.stream()
+        return listMesasServidasOcupadas.stream()
                 .sorted(Comparator.comparing(MesaServida::getNumero))
                 .collect(Collectors.toList());
     }
@@ -100,7 +100,7 @@ public class MesasCUImpl implements MesasCU {
     }
 
     private MesaServida extraerOModificarMesaServida(MesaServida mesaServida) {
-        return Optional.ofNullable(this.mesaServidaPort.obtenerActivaPorMesa(mesaServida.getMesaReferencia()))
+        return Optional.ofNullable(this.mesaServidaPort.obtenerOcupadaPorMesa(mesaServida.getMesaReferencia()))
                 .orElseGet(() -> {
                     final Optional<Mesa> mesaBBDD = this.mesaPort.obtenerPorId(UUID.fromString(mesaServida.getMesaReferencia()));
                     mesaBBDD.ifPresent(m -> {
@@ -160,8 +160,22 @@ public class MesasCUImpl implements MesasCU {
         this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
     }
 
-    private static void agregarMesasNoActivas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasActivas) {
-        final Set<String> idsMesasServidas = listMesasServidasActivas.stream()
+    @Override
+    public List<String> obtenerCamareros() {
+        return this.mesaServidaPort.obtenerCamareros();
+    }
+
+    @Override
+    public void arquearMesas(List<UUID> ids, String usuario) {
+        final List<MesaServida> mesasParaArquear = this.mesaServidaPort.obtenerPorIds(ids);
+        mesasParaArquear.forEach(mesaServida -> {
+            mesaServida.arquearMesa(usuario);
+            this.mesaServidaPort.update(mesaServida);
+        });
+    }
+
+    private static void agregarMesasNoOcupadas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasOcupadas) {
+        final Set<String> idsMesasServidas = listMesasServidasOcupadas.stream()
                 .map(MesaServida::getMesaReferencia) // Asumiendo que 'mesaReferencia' es el ID en MesaServida
                 .collect(Collectors.toSet());
         listMesasMaestras.stream()
@@ -169,16 +183,18 @@ public class MesasCUImpl implements MesasCU {
                 .forEach(mesa -> {
                     final MesaServida nuevaMesaServida = MesaServida.initFromMesa(mesa, false);
                     nuevaMesaServida.liberarMesaServida();
-                    listMesasServidasActivas.add(nuevaMesaServida);
+                    listMesasServidasOcupadas.add(nuevaMesaServida);
                 });
     }
 
-    private List<MesaServida> obtenerMesasActivasConProductos() {
-        final List<MesaServida> listMesasServidasActivas = this.mesaServidaPort.obtenerActivas();
-        listMesasServidasActivas.forEach(mesaServidaActiva -> {
-            mesaServidaActiva.setProducts(this.productoMesaPort.findByMesaServidaRef(mesaServidaActiva.getId().toString()));
-            mesaServidaActiva.setOcupada(true);
+    private List<MesaServida> obtenerMesasOcupadasConProductos() {
+        final List<MesaServida> listMesasServidasOcupadas = this.mesaServidaPort.obtenerOcupadas();
+        listMesasServidasOcupadas.forEach(mesaServidaOcupada -> {
+            mesaServidaOcupada.setProducts(this.productoMesaPort.findByMesaServidaRef(mesaServidaOcupada.getId().toString()));
+            mesaServidaOcupada.setOcupada(true);
         });
-        return listMesasServidasActivas;
+        return listMesasServidasOcupadas;
     }
+
+
 }

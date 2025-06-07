@@ -16,13 +16,13 @@ public class MesaServidaAdapter implements MesaServidaPort {
     private final MesaServidaRepository mesaServidaRepository;
 
     @Override
-    public List<MesaServida> obtenerActivas() {
-        return this.mesaServidaRepository.findByActivaTrue();
+    public List<MesaServida> obtenerOcupadas() {
+        return this.mesaServidaRepository.findByOcupadaTrue();
     }
 
     @Override
-    public MesaServida obtenerActivaPorMesa(String idMesa) {
-        return this.mesaServidaRepository.findByMesaReferenciaAndActivaTrue(idMesa).orElse(null);
+    public MesaServida obtenerOcupadaPorMesa(String idMesa) {
+        return this.mesaServidaRepository.findByMesaReferenciaAndOcupadaTrue(idMesa).orElse(null);
     }
 
     @Override
@@ -36,7 +36,17 @@ public class MesaServidaAdapter implements MesaServidaPort {
     }
 
     @Override
+    public List<MesaServida> obtenerPorIds(List<UUID> ids) {
+        return (List<MesaServida>) this.mesaServidaRepository.findAllById(ids);
+    }
+
+    @Override
     public void update(MesaServida mesaServidaBBDD) {
         this.mesaServidaRepository.save(mesaServidaBBDD);
+    }
+
+    @Override
+    public List<String> obtenerCamareros() {
+        return this.mesaServidaRepository.findDistinctCamareros();
     }
 }

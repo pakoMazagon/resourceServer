@@ -3,6 +3,7 @@ package com.tpv.mesas.infrastructure.persistence.criteria;
 import com.tpv.mesas.domain.criteria.criteria.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Component
@@ -13,8 +14,11 @@ public class PostgresCriteriaConverter {
             FilterOperator.Operator.NOT_EQUAL, "<>",
             FilterOperator.Operator.GT, ">",
             FilterOperator.Operator.LT, "<",
+            FilterOperator.Operator.GT_OR_EQ, ">=",
+            FilterOperator.Operator.LT_OR_EQ, "<=",
             FilterOperator.Operator.CONTAINS, "LIKE",
-            FilterOperator.Operator.NOT_CONTAINS, "NOT LIKE"
+            FilterOperator.Operator.NOT_CONTAINS, "NOT LIKE",
+            FilterOperator.Operator.IN, "IN"
     );
 
     public String convert(Criteria criteria) {
@@ -59,6 +63,14 @@ public class PostgresCriteriaConverter {
     private String formatValue(String value, String operator) {
         if (operator.equals("LIKE") || operator.equals("NOT LIKE")) {
             return "'%" + this.escapeSql(value) + "%'";
+        } else if (operator.equals("IN")) {
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .map(s -> "'" + this.escapeSql(s) + "'")
+                    .reduce((a, b) -> a + "," + b)
+                    .map(list -> "(" + list + ")")
+                    .orElse("('')");
         }
         return "'" + this.escapeSql(value) + "'";
     }

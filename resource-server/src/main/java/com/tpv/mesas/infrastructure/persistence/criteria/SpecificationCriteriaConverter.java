@@ -47,6 +47,8 @@ public class SpecificationCriteriaConverter {
                     return cb.like(root.get(filter.field().value()), "%" + filter.value().value() + "%");
                 case NOT_CONTAINS:
                     return cb.notLike(root.get(filter.field().value()), "%" + filter.value().value() + "%");
+                case IN:
+                    return cb.notLike(root.get(filter.field().value()), "(" + filter.value().value() + ")");
                 default:
                     throw new IllegalArgumentException("Invalid operator");
             }
