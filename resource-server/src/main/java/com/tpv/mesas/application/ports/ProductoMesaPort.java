@@ -16,4 +16,6 @@ public interface ProductoMesaPort {
     ProductoMesa createOrUpdate(ProductoMesa productoMesa);
 
     void eliminarPorId(UUID id);
+
+    List<ProductoMesa> obtenerTodosEnCurso();
 }

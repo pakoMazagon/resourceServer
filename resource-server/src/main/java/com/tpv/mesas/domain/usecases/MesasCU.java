@@ -2,6 +2,7 @@ package com.tpv.mesas.domain.usecases;
 
 import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
+import com.tpv.mesas.domain.entities.vo.PedidoVO;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,4 +23,6 @@ public interface MesasCU {
     List<String> obtenerCamareros();
 
     void arquearMesas(List<UUID> ids, String usuario);
+
+    List<PedidoVO> obtenerTodosLosPedidos();
 }

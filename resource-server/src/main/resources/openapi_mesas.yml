@@ -287,6 +287,23 @@ paths:
                   error:
                     type: string
                     example: "Error inesperado al cobrar la mesa."
+  /pedidos:
+    get:
+      summary: Obtener todos los pedidos existentes
+      description: Devuelve una lista de todos los pedidos registrados en la base de datos.
+      tags:
+        - Pedidos
+      responses:
+        '200':
+          description: Lista de pedidos obtenida con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+        '500':
+          description: Error al obtener los pedidos                    
 
 components:
   schemas:
@@ -355,3 +372,16 @@ components:
           format: date-time
         version:
           type: integer
+    Pedido:
+      type: object
+      properties:
+        sector:
+          type: string
+        numeroMesa:
+          type: integer
+        nombreMesa:
+          type: string
+        camarero:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductoEnMesa'

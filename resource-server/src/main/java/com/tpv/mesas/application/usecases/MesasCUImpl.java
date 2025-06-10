@@ -1,13 +1,12 @@
 package com.tpv.mesas.application.usecases;
 
-import com.tpv.mesas.application.ports.MesaServidaPort;
-import com.tpv.mesas.application.ports.MesasPort;
-import com.tpv.mesas.application.ports.MesasWSPort;
-import com.tpv.mesas.application.ports.ProductoMesaPort;
+import com.tpv.mesas.application.ports.*;
 import com.tpv.mesas.domain.entities.Mesa;
 import com.tpv.mesas.domain.entities.MesaServida;
 import com.tpv.mesas.domain.entities.ProductoMesa;
+import com.tpv.mesas.domain.entities.enums.EstadoProductoEnum;
 import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
+import com.tpv.mesas.domain.entities.vo.PedidoVO;
 import com.tpv.mesas.domain.usecases.MesasCU;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +30,8 @@ public class MesasCUImpl implements MesasCU {
 
     private final ProductoMesaPort productoMesaPort;
 
+    private final PedidoWSPort pedidoWSPort;
+
     @Override
     public List<MesaServida> obtenerTodas() {
         final List<MesaServida> listMesasServidasOcupadas = this.obtenerMesasOcupadasConProductos();
@@ -53,10 +54,10 @@ public class MesasCUImpl implements MesasCU {
         final MesaServida mesaServidaBBDD = this.extraerOModificarMesaServida(mesaServida);
         mesaServidaBBDD.setOcupada(true);
         final List<ProductoMesa> productos = Optional.ofNullable(mesaServida.getProducts()).orElse(new ArrayList<>());
-        final double cantidadTotal = this.actualizarProductosEnMesa(productos);
+        final double cantidadTotal = this.actualizarProductosEnMesa(productos, mesaServida);
         final List<ProductoMesa> productosInBBDD = this.productoMesaPort.findByMesaServidaRef(mesaServidaBBDD.getId().toString());
         //si en la bbdd hay mas productos significa que se ha eliminado un producto y habrá que eliminarlo de la bbdd
-        final List<ProductoMesa> productosActualizados = productos.size() < productosInBBDD.size() ? this.eliminarProductoMesa(productos, productosInBBDD) : productosInBBDD;
+        final List<ProductoMesa> productosActualizados = productos.size() < productosInBBDD.size() ? this.eliminarFisicoProductoMesa(productos, productosInBBDD) : productosInBBDD;
         mesaServidaBBDD.setProducts(productosActualizados);
         mesaServidaBBDD.setCantidad(cantidadTotal);
 
@@ -65,9 +66,10 @@ public class MesasCUImpl implements MesasCU {
         return mesaServidaBBDD;
     }
 
-    private List<ProductoMesa> eliminarProductoMesa(List<ProductoMesa> productos, List<ProductoMesa> productosInBBDD) {
+    private List<ProductoMesa> eliminarFisicoProductoMesa(List<ProductoMesa> productos, List<ProductoMesa> productosInBBDD) {
         final List<ProductoMesa> productosCoincidentes = new ArrayList<>();
         final List<UUID> productosIds = productos.stream().map(p -> p.getId()).toList();
+        //Aqui se borra el pedido.. Creo que no debemos hacer nada
 
         for (final ProductoMesa productoBBDD : productosInBBDD) {
             if (productosIds.contains(productoBBDD.getId())) {
@@ -79,7 +81,7 @@ public class MesasCUImpl implements MesasCU {
         return productosCoincidentes;
     }
 
-    private double actualizarProductosEnMesa(List<ProductoMesa> productos) {
+    private double actualizarProductosEnMesa(List<ProductoMesa> productos, MesaServida mesaServida) {
         return productos.stream()
                 .mapToDouble(producto -> {
                     final double subtotal = producto.getPrecio() * producto.getUnidades();
@@ -87,14 +89,21 @@ public class MesasCUImpl implements MesasCU {
                             producto.getMesaReferencia(), producto.getProductoReferencia());
 
                     productoExistente.ifPresentOrElse(
-                            p -> producto.setId(p.getId()),
+                            p -> {
+                                producto.setId(p.getId());
+                            },
                             () -> {
                                 producto.setId(null);
                                 producto.setFechaHoraCreacion(LocalDateTime.now());
                                 producto.setVersion(0);
                             });
-
+                    final int unidadesPrevias = productoExistente.isPresent() ? productoExistente.get().getUnidades() : 0;
                     this.productoMesaPort.createOrUpdate(producto);
+                    if (producto.getVersion() == 0 || unidadesPrevias < producto.getUnidades()) {
+                        final PedidoVO productoVO = PedidoVO.builder().product(producto).nombreMesa(mesaServida.getNombre())
+                                .camarero(mesaServida.getCamarero()).sector(mesaServida.getSector()).build();
+                        this.pedidoWSPort.notifyPedidoUpdate(productoVO);
+                    }
                     return subtotal;
                 }).sum();
     }
@@ -127,6 +136,7 @@ public class MesasCUImpl implements MesasCU {
     }
 
     @Override
+    @Transactional
     public MesaServida cambiaNombreMesa(String id, String nuevoNombre) {
         final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
         mesaServida.setNombre(nuevoNombre);
@@ -136,6 +146,7 @@ public class MesasCUImpl implements MesasCU {
     }
 
     @Override
+    @Transactional
     public void eliminar(String id) {
         final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
         mesaServida.borrarMesa();
@@ -146,9 +157,11 @@ public class MesasCUImpl implements MesasCU {
         final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra, false);
         mesaServidaDev.liberarMesaServida();
         this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
+        this.marcarProductosEnMesa(id, EstadoProductoEnum.BORRADO_POR_MESA);
     }
 
     @Override
+    @Transactional
     public void cobrar(String id, MetodoPagoEnum metodoPago) {
         final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
         mesaServida.cobrarMesa(metodoPago);
@@ -158,6 +171,17 @@ public class MesasCUImpl implements MesasCU {
         this.mesaPort.actualizarMesa(mesaMaestra);
         final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra, false);
         this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
+        this.marcarProductosEnMesa(id, EstadoProductoEnum.PUESTO_EN_MESA);
+    }
+
+    private void marcarProductosEnMesa(String idMesa, EstadoProductoEnum puestoEnMesa) {
+        final List<ProductoMesa> productosMesa = this.productoMesaPort.findByMesaServidaRef(idMesa);
+        productosMesa.forEach(productoMesa -> {
+            productoMesa.setEstado(puestoEnMesa);
+            this.productoMesaPort.createOrUpdate(productoMesa);
+            // en principio parece que no informamos a cocina, cocinatendra pulling cada 2 min
+            // si tuviese que actualizar seria aqui... y por este motivo voy de 1 en 1 aunque lo correcto seria marcarlos todos de a 1
+        });
     }
 
     @Override
@@ -166,12 +190,29 @@ public class MesasCUImpl implements MesasCU {
     }
 
     @Override
+    @Transactional
     public void arquearMesas(List<UUID> ids, String usuario) {
         final List<MesaServida> mesasParaArquear = this.mesaServidaPort.obtenerPorIds(ids);
         mesasParaArquear.forEach(mesaServida -> {
             mesaServida.arquearMesa(usuario);
             this.mesaServidaPort.update(mesaServida);
         });
+    }
+
+    @Override
+    public List<PedidoVO> obtenerTodosLosPedidos() {
+        final List<ProductoMesa> productosEnCurso = this.productoMesaPort.obtenerTodosEnCurso();
+        final Map<String, MesaServida> mesasServidas = new HashMap<>();
+        final List<PedidoVO> pedidosList = productosEnCurso.stream().map(productoMesa -> {
+            MesaServida mesaServidaRef = null;
+            mesaServidaRef = mesasServidas.get(productoMesa.getMesaReferencia());
+            if (mesaServidaRef == null) {
+                mesaServidaRef = this.mesaServidaPort.obtenerPorId(productoMesa.getMesaReferencia());
+            }
+            return PedidoVO.builder().product(productoMesa).nombreMesa(mesaServidaRef.getNombre())
+                    .camarero(mesaServidaRef.getCamarero()).sector(mesaServidaRef.getSector()).build();
+        }).toList();
+        return pedidosList;
     }
 
     private static void agregarMesasNoOcupadas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasOcupadas) {
