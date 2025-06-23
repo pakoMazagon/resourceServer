@@ -33,4 +33,18 @@ public class ProductoMesa {
 
     @Version
     private int version;
+
+    public void arquearProductoMesa() {
+        if (!this.estado.equals(EstadoProductoEnum.BARRA) && !this.estado.equals(EstadoProductoEnum.PUESTO_EN_MESA)) {
+            this.setFechaHoraServido(LocalDateTime.now());
+            this.setEstado(EstadoProductoEnum.ARQUEO);
+        }
+    }
+
+    public void cobrarProductoMesa() {
+        if (!this.estado.equals(EstadoProductoEnum.BARRA) && !this.estado.equals(EstadoProductoEnum.PUESTO_EN_MESA)) {
+            this.setFechaHoraServido(LocalDateTime.now());
+            this.setEstado(EstadoProductoEnum.COBRADO);
+        }
+    }
 }

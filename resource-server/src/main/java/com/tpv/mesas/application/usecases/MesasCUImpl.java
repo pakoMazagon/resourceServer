@@ -102,7 +102,8 @@ public class MesasCUImpl implements MesasCU {
                     if (producto.getVersion() == 0 || unidadesPrevias < producto.getUnidades()) {
                         final PedidoVO productoVO = PedidoVO.builder().product(producto).nombreMesa(mesaServida.getNombre())
                                 .camarero(mesaServida.getCamarero()).sector(mesaServida.getSector()).build();
-                        this.pedidoWSPort.notifyPedidoUpdate(productoVO);
+                        if (producto.getEstado() != EstadoProductoEnum.BARRA)
+                            this.pedidoWSPort.notifyPedidoUpdate(productoVO);
                     }
                     return subtotal;
                 }).sum();
@@ -171,7 +172,13 @@ public class MesasCUImpl implements MesasCU {
         this.mesaPort.actualizarMesa(mesaMaestra);
         final MesaServida mesaServidaDev = MesaServida.initFromMesa(mesaMaestra, false);
         this.mesasWSPort.notifyMesaUpdate(mesaServidaDev);
-        this.marcarProductosEnMesa(id, EstadoProductoEnum.PUESTO_EN_MESA);
+        final List<ProductoMesa> productosMesa = this.productoMesaPort.findByMesaServidaRef(mesaServida.getId().toString());
+        productosMesa.forEach(productoMesa -> {
+            productoMesa.cobrarProductoMesa();
+            this.productoMesaPort.createOrUpdate(productoMesa);
+            // en principio parece que no informamos a cocina, cocinatendra pulling cada 2 min
+            // si tuviese que actualizar seria aqui... y por este motivo voy de 1 en 1 aunque lo correcto seria marcarlos todos de a 1
+        });
     }
 
     private void marcarProductosEnMesa(String idMesa, EstadoProductoEnum puestoEnMesa) {
@@ -196,6 +203,12 @@ public class MesasCUImpl implements MesasCU {
         mesasParaArquear.forEach(mesaServida -> {
             mesaServida.arquearMesa(usuario);
             this.mesaServidaPort.update(mesaServida);
+            final List<ProductoMesa> productosMesa = this.productoMesaPort.findByMesaServidaRef(mesaServida.getId().toString());
+            productosMesa.forEach(productoMesa -> {
+                        productoMesa.arquearProductoMesa();
+                        this.productoMesaPort.createOrUpdate(productoMesa);
+                    }
+            );
         });
     }
 
