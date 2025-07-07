@@ -67,6 +67,18 @@ public class MesaController implements MesasApi {
     }
 
     @Override
+    public ResponseEntity<CambiaNombreMesa200ResponseDTO> cambiaCamareroMesa(
+            @Parameter(name = "id", description = "ID de la mesa a renombrar.", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+            @Parameter(name = "CambiaNombreMesaRequestDTO", description = "", required = true) @Valid @RequestBody CambiaCamareroMesaRequestDTO cambiaCamareroMesaRequestDTO
+    ) {
+        this.mesasCU.cambiaCamareroMesa(id, cambiaCamareroMesaRequestDTO.getCamarero());
+
+        final CambiaNombreMesa200ResponseDTO bodyDev = new CambiaNombreMesa200ResponseDTO();
+        bodyDev.setMessage(String.format("Mesa id {} cambia de camarero {} por camarero{}", id, cambiaCamareroMesaRequestDTO.getCamarero()));
+        return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+    }
+
+    @Override
     public ResponseEntity<BorraMesa200ResponseDTO> borraMesa(
             @Parameter(name = "id", description = "ID de la mesa a eliminar.", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {

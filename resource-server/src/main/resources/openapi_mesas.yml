@@ -150,6 +150,58 @@ paths:
                 properties:
                   error:
                     type: string
+                    
+  /mesas/{id}/camarero:
+    patch:
+      summary: Modificar camarero de la mesa
+      description: Actualiza el camarero de la mesa.
+      operationId: cambiaCamareroMesa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la mesa a renombrar.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                camarero:
+                  type: string
+                  example: "Nuevo nombre"
+      responses:
+        '200':
+          description: Camarero de la mesa actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Nombre actualizado exitosamente."
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string                    
 
   /mesas/{id}:
     delete:

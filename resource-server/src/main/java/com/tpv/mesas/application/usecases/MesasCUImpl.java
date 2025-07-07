@@ -148,6 +148,16 @@ public class MesasCUImpl implements MesasCU {
 
     @Override
     @Transactional
+    public MesaServida cambiaCamareroMesa(String id, String nuevoCamarero) {
+        final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
+        mesaServida.setCamarero(nuevoCamarero);
+        this.mesaServidaPort.update(mesaServida);
+        this.mesasWSPort.notifyMesaUpdate(mesaServida);
+        return mesaServida;
+    }
+
+    @Override
+    @Transactional
     public void eliminar(String id) {
         final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
         mesaServida.borrarMesa();
