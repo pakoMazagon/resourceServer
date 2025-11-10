@@ -5,6 +5,7 @@ import com.tpv.mesas.domain.entities.enums.MetodoPagoEnum;
 import com.tpv.mesas.domain.entities.vo.PedidoVO;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.PrintException;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,4 +30,6 @@ public interface MesasCU {
     void arquearMesas(List<UUID> ids, String usuario);
 
     List<PedidoVO> obtenerTodosLosPedidos();
+
+    void imprimir(String id) throws PrintException;
 }

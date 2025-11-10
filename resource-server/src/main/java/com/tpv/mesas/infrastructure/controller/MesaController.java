@@ -100,4 +100,19 @@ public class MesaController implements MesasApi {
         return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
 
     }
+
+    @Override
+    public ResponseEntity<ImprimeMesa200ResponseDTO> imprimeMesa(
+            @Parameter(name = "id", description = "ID de la mesa a imprimir.", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
+    ) {
+        try {
+            this.mesasCU.imprimir(id);
+            final ImprimeMesa200ResponseDTO bodyDev = new ImprimeMesa200ResponseDTO();
+            bodyDev.setMessage(String.format("Mesa id {} impresa{}", id));
+            return ResponseEntity.status(HttpStatus.OK).body(bodyDev);
+        } catch (final Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+    }
 }

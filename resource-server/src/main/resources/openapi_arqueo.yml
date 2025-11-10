@@ -33,6 +33,10 @@ paths:
                   type: integer
                 offset:
                   type: integer
+                imprimir:
+                  type: boolean
+                  description: Indica si se debe imprimir un resumen de los resultados de la búsqueda.
+                  default: false
       responses:
         '200':
           description: Mesa solicitada.

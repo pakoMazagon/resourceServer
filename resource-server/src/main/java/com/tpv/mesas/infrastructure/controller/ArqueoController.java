@@ -34,7 +34,7 @@ public class ArqueoController implements ArqueoApi {
         final Filters parsedFilters = this.parseFiltersJson(arqueoBuscarPostRequestDTO.getFilters()); // usa Jackson o Gson
         final Order order = Order.fromValues(arqueoBuscarPostRequestDTO.getSortField(), arqueoBuscarPostRequestDTO.getSortDirection());
 
-        final List<MesaServida> mesasList = this.facturacionCU.findByCriteria(parsedFilters, order, arqueoBuscarPostRequestDTO.getLimit(), arqueoBuscarPostRequestDTO.getOffset());
+        final List<MesaServida> mesasList = this.facturacionCU.findByCriteria(parsedFilters, order, arqueoBuscarPostRequestDTO.getLimit(), arqueoBuscarPostRequestDTO.getOffset(), arqueoBuscarPostRequestDTO.getImprimir());
         return ResponseEntity.status(HttpStatus.OK).body(mesasList.stream().map(mesa -> this.mapper.mapToMesaServidaDTO(mesa)).toList());
     }
 

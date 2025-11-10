@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.PrintException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,6 +32,8 @@ public class MesasCUImpl implements MesasCU {
     private final ProductoMesaPort productoMesaPort;
 
     private final PedidoWSPort pedidoWSPort;
+
+    private final PrintPort printPort;
 
     @Override
     public List<MesaServida> obtenerTodas() {
@@ -236,6 +239,14 @@ public class MesasCUImpl implements MesasCU {
                     .camarero(mesaServidaRef.getCamarero()).sector(mesaServidaRef.getSector()).build();
         }).toList();
         return pedidosList;
+    }
+
+    @Override
+    public void imprimir(String id) throws PrintException {
+        final MesaServida mesaServida = this.obtenerMesaServidaPorId(id);
+        final List<ProductoMesa> productos = this.productoMesaPort.findByMesaServidaRef(id);
+        this.printPort.printTicket("POS-80", mesaServida.getCamarero(), productos, mesaServida);
+
     }
 
     private static void agregarMesasNoOcupadas(List<Mesa> listMesasMaestras, List<MesaServida> listMesasServidasOcupadas) {

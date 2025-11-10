@@ -58,7 +58,7 @@ public class PosgressFacturacionRepositoryIT extends AbstractPostgresTestContain
         ));
 
         // When
-        final List<MesaServida> result = this.facturacionCU.findByCriteria(filters, Order.fromValues("id", "asc"), null, null);
+        final List<MesaServida> result = this.facturacionCU.findByCriteria(filters, Order.fromValues("id", "asc"), null, null, false);
 
         // Then
         assertThat(result).hasSize(1);
@@ -98,7 +98,7 @@ public class PosgressFacturacionRepositoryIT extends AbstractPostgresTestContain
         ));
 
         // When
-        final List<MesaServida> result = this.facturacionCU.findByCriteria(filters, Order.fromValues("id", "asc"), null, null);
+        final List<MesaServida> result = this.facturacionCU.findByCriteria(filters, Order.fromValues("id", "asc"), null, null, false);
 
         // Then
         assertThat(result).hasSize(4);

@@ -7,5 +7,5 @@ import com.tpv.mesas.domain.entities.MesaServida;
 import java.util.List;
 
 public interface FacturacionCU {
-    List<MesaServida> findByCriteria(Filters filters, Order order, Integer limit, Integer offset);
+    List<MesaServida> findByCriteria(Filters filters, Order order, Integer limit, Integer offset, Boolean imprime);
 }
