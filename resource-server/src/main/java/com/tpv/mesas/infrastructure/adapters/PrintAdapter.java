@@ -175,7 +175,7 @@ public class PrintAdapter implements PrintPort {
             baos.write(EscPosCommands.TEXT_WIDE);
 
             // Línea de Total Mesas
-            baos.write(("TOTAL MESAS ENCONTRADAS: " + totalMesas + "\n").getBytes(charset));
+            baos.write(("TOTAL MESAS: " + totalMesas + "\n").getBytes(charset));
 
             // Línea de Suma Total
             baos.write(("SUMA TOTAL: " + String.format(Locale.US, "%.2f", sumaTotal) + " EUR\n").getBytes(charset));
