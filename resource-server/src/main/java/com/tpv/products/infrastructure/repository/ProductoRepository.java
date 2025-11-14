@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ProductoRepository extends CrudRepository<Producto, UUID> {
-    List<Producto> findAll();
+    List<Producto> findAllByOrderByNombreAsc();
 
     List<Producto> findByCocinaTrue();
 }

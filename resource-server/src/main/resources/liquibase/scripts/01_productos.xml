@@ -24,7 +24,7 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'cerveza_caña', 'cerveza caña', 'bebidas', 1.60, 1.70, 1.70, false, NULL),
+            (gen_random_uuid(), 'cerveza_caña', 'cerveza caña', 'bebidas', 1.70, 1.70, 1.70, false, NULL),
             (gen_random_uuid(), 'cerveza_cortada', 'cerveza cortada', 'bebidas', 2.00, 2.10, 2.10, false, NULL),
             (gen_random_uuid(), 'cerveza_copa', 'cerveza copa', 'bebidas', 3.20, 3.30, 3.30, false, NULL),
             (gen_random_uuid(), 'cerveza_extra', 'cerveza extra', 'bebidas', 3.60, 3.70, 3.70, false, NULL),
@@ -49,23 +49,27 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'tomate_aliniado', 'tomate aliñado', 'entrantes', 4.0, 4.0, 4.0, true, NULL),
-            (gen_random_uuid(), 'tomate_melva', 'tomate aliñado con melva', 'entrantes', 6.0, 6.0, 6.0, true, NULL),
-            (gen_random_uuid(), 'ensalada', 'ensalada', 'entrantes', 3.2, 3.2, 3.2, true, NULL),
-            (gen_random_uuid(), 'ensalada_mixta', 'ensalada mixta', 'entrantes', 3.5, 3.5, 3.5, true, NULL),
-            (gen_random_uuid(), 'jamon', 'jamon', 'entrantes', 18.0, 18.5, 18.0, true, NULL),
-            (gen_random_uuid(), 'queso', 'queso', 'entrantes', 16.0, 17.0, 16.0, true, NULL),
-            (gen_random_uuid(), 'anchoas_pimenta', 'anchoas pimentá', 'entrantes', 21.0, 21.5, 21.0, true, NULL),
-            (gen_random_uuid(), 'anchoas_cantabrico', 'anchoas cantabrico', 'entrantes', 19.5, 20.0, 19.5, true, NULL),
-            (gen_random_uuid(), 'anchoas_queso', 'anchoas cantabrico queso', 'entrantes', 24.0, 24.5, 24.0, true, NULL),
-            (gen_random_uuid(), 'pulpo_gallega', 'pulpo gallega', 'entrantes', 14.0, 14.5, 14.0, true, NULL),
-            (gen_random_uuid(), 'pulpo_brasa', 'pulpo brasa', 'entrantes', 14.0, 14.5, 14.0, true, NULL),
-            (gen_random_uuid(), 'kokotxa_merluza', 'kokotxa merluza', 'entrantes', 19.5, 20.0, 19.5, true, NULL),
-            (gen_random_uuid(), 'mojama', 'mojama', 'entrantes', 13.5, 14.5, 13.5, true, NULL),
-            (gen_random_uuid(), 'pimentada', 'pimentada', 'entrantes', 7.5, 7.5, 7.5, true, NULL),
-            (gen_random_uuid(), 'pimentada_melva', 'pimentada melva', 'entrantes', 9.0, 9.5, 9.0, true, NULL),
-            (gen_random_uuid(), 'gazpacho', 'gazpacho', 'entrantes', 3.5, 3.5, 3.5, true, NULL),
-            (gen_random_uuid(), 'salmorejo', 'salmorejo', 'entrantes', 4.0, 4.0, 4.0, true, NULL);
+            (gen_random_uuid(), 'tomate_aliniado', 'tomate aliñado', 'entrantes', 5.5, 5.5, 5.5, true, NULL),
+            (gen_random_uuid(), 'tomate_melva', 'tomate aliñado con melva', 'entrantes', 8.5, 8.5, 8.5, true, NULL),
+            (gen_random_uuid(), 'ensalada', 'ensalada', 'entrantes', 3.9, 3.9, 3.9, true, NULL),
+            (gen_random_uuid(), 'ensalada_mixta', 'ensalada mixta', 'entrantes', 4.3, 4.3, 4.3, true, NULL),
+            (gen_random_uuid(), 'jamon', 'jamon', 'entrantes', 23.5, 23.5, 23.5, true, NULL),
+            (gen_random_uuid(), 'jamon_media', 'jamon 1/2 rac', 'entrantes', 13.50, 13.50, 13.50, true, NULL),
+            (gen_random_uuid(), 'queso', 'queso', 'entrantes', 22.0, 22.0, 22.0, true, NULL),
+            (gen_random_uuid(), 'queso_media', 'queso 1/2', 'entrantes', 13.0, 13.0, 13.0, true, NULL),
+            (gen_random_uuid(), 'anchoas_pimenta', 'anchoas pimentá', 'entrantes', 27.0, 27.0, 27.0, true, NULL),
+            (gen_random_uuid(), 'anchoas_cantabrico', 'anchoas cantabrico', 'entrantes', 25.0, 25.0, 25.0, true, NULL),
+            (gen_random_uuid(), 'anchoas_queso', 'anchoas cantabrico queso', 'entrantes', 33.0, 33.0, 33.0, true, NULL),
+            (gen_random_uuid(), 'pulpo_gallega', 'pulpo gallega', 'entrantes', 20.0, 20.0, 20.0, true, NULL),
+            (gen_random_uuid(), 'pulpo_gallega_media', 'pulpo gallega 1/2', 'entrantes', 13.0, 13.0, 13.0, true, NULL),
+            (gen_random_uuid(), 'pulpo_brasa', 'pulpo brasa', 'entrantes', 20.0, 20.0, 20.0, true, NULL),
+            (gen_random_uuid(), 'kokotxa_merluza', 'kokotxa merluza', 'entrantes', 25.0, 25.0, 25.0, true, NULL),
+            (gen_random_uuid(), 'mojama', 'mojama', 'entrantes', 19.5, 19.5, 19.5, true, NULL),
+            (gen_random_uuid(), 'pimentada', 'pimentada', 'entrantes', 13.0, 13.0, 13.0, true, NULL),
+            (gen_random_uuid(), 'pimentada_melva', 'pimentada melva', 'entrantes', 15.5, 15.5, 15.5, true, NULL),
+            (gen_random_uuid(), 'gazpacho', 'gazpacho', 'entrantes', 5.0, 5.0, 5.0, true, NULL),
+            (gen_random_uuid(), 'salmorejo', 'salmorejo', 'entrantes', 6.0, 6.0, 6.0, true, NULL),
+            (gen_random_uuid(), 'servicio_persona', 'servicio por persona', 'entrantes', 1.5, 1.5, 1.5, true, NULL);
         </sql>
     </changeSet>
 
@@ -73,14 +77,14 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'gamba_extra', 'gamba extra rac', 'mariscos', 42.0, 42.5, 0.0, true, NULL),
-            (gen_random_uuid(), 'gamba_extra_media', 'gamba extra 1/2', 'mariscos', 42.0, 42.5, 0.0, true, NULL),
+            (gen_random_uuid(), 'gamba_extra', 'gamba extra rac', 'mariscos', 47.0, 47.0, 0.0, true, NULL),
+            (gen_random_uuid(), 'gamba_extra_media', 'gamba extra 1/2', 'mariscos', 28.0, 28.0, 0.0, true, NULL),
             (gen_random_uuid(), 'langostinos', 'langostinos', 'mariscos', 0.0, 0.0, 15.0, true, NULL),
             (gen_random_uuid(), 'cigalas', 'cigalas', 'mariscos', 0.0, 0.0, 17.0, true, NULL),
-            (gen_random_uuid(), 'ostra', 'ostra', 'mariscos', 5.0, 5.0, 5.0, true, NULL),
-            (gen_random_uuid(), 'coquina', 'coquina', 'mariscos', 16.0, 16.5, 0.0, true, NULL),
-            (gen_random_uuid(), 'chirla', 'chirla', 'mariscos', 14.0, 14.5, 0.0, true, NULL),
-            (gen_random_uuid(), 'finas', 'finas', 'mariscos', 19.0, 19.5, 0.0, true, NULL);
+            (gen_random_uuid(), 'ostra', 'ostra', 'mariscos', 5.3, 5.3, 5.3, true, NULL),
+            (gen_random_uuid(), 'coquina', 'coquina', 'mariscos', 21.0, 21.0, 21.0, true, NULL),
+            (gen_random_uuid(), 'chirla', 'chirla', 'mariscos', 17.5, 17.5, 0.0, true, NULL),
+            (gen_random_uuid(), 'finas', 'finas', 'mariscos', 22.5, 22.5, 0.0, true, NULL);
         </sql>
     </changeSet>
 
@@ -88,29 +92,29 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'chocos', 'chocos rac', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'chocos_media', 'chocos 1/2', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'rosado', 'rosado rac', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'rosado_media', 'rosado 1/2', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'pijotas', 'pijotas rac', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'pijotas_media', 'pijotas 1/2', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'acedias', 'acedias rac', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'acedias_media', 'acedias 1/2', 'fritos', 13.00, 7.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'boquerones', 'boquerones rac', 'fritos', 12.00, 7.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'boquerones_media', 'boquerones 1/2', 'fritos', 12.00, 7.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'salmonetes', 'salmonetes rac', 'fritos', 15.00, 8.20, 0.00, true, NULL),
-            (gen_random_uuid(), 'salmonetes_media', 'salmonetes 1/2', 'fritos', 15.00, 8.20, 0.00, true, NULL),
-            (gen_random_uuid(), 'ortiguillas', 'ortiguillas rac', 'fritos', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'ortiguillas_media', 'ortiguillas 1/2', 'fritos', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'huevas_merluza_frita', 'huevas merluza rac', 'fritos', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'huevas_merluza_frita_media', 'huevas merluza 1/2', 'fritos', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'taquitos_rape', 'taquitos rape rac', 'fritos', 18.50, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'taquitos_rape_media', 'taquitos rape 1/2', 'fritos', 18.50, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'taquitos_corvina', 'taquitos corvina rac', 'fritos', 18.50, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'taquitos_corvina_media', 'taquitos corvina 1/2', 'fritos', 18.50, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'croquetas', 'croquetas rac', 'fritos', 11.00, 6.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'croquetas_media', 'croquetas 1/2', 'fritos', 11.00, 6.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'frito_variado', 'frito variado', 'fritos', 34.00, 34.00, 0.00, true, NULL);
+            (gen_random_uuid(), 'chocos', 'chocos rac', 'fritos', 17.20, 17.20, 0.00, true, NULL),
+            (gen_random_uuid(), 'chocos_media', 'chocos 1/2', 'fritos', 9.90, 9.90, 0.00, true, NULL),
+            (gen_random_uuid(), 'rosado', 'rosado rac', 'fritos', 17.20, 17.20, 0.00, true, NULL),
+            (gen_random_uuid(), 'rosado_media', 'rosado 1/2', 'fritos', 9.80, 9.80, 0.00, true, NULL),
+            (gen_random_uuid(), 'pijotas', 'pijotas rac', 'fritos', 17.20, 17.20, 0.00, true, NULL),
+            (gen_random_uuid(), 'pijotas_media', 'pijotas 1/2', 'fritos', 9.80, 9.80, 0.00, true, NULL),
+            (gen_random_uuid(), 'acedias', 'acedias rac', 'fritos', 17.20, 17.20, 0.00, true, NULL),
+            (gen_random_uuid(), 'acedias_media', 'acedias 1/2', 'fritos', 9.80, 9.80, 0.00, true, NULL),
+            (gen_random_uuid(), 'boquerones', 'boquerones rac', 'fritos', 16.00, 16.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'boquerones_media', 'boquerones 1/2', 'fritos', 9.00, 9.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'salmonetes', 'salmonetes rac', 'fritos', 19.50, 19.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'salmonetes_media', 'salmonetes 1/2', 'fritos', 12.00, 12.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'ortiguillas', 'ortiguillas rac', 'fritos', 22.5, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'ortiguillas_media', 'ortiguillas 1/2', 'fritos', 13.00, 13.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'huevas_merluza_frita', 'huevas merluza rac', 'fritos', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'huevas_merluza_frita_media', 'huevas merluza 1/2', 'fritos', 13.00, 13.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'taquitos_rape', 'taquitos rape rac', 'fritos', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'taquitos_rape_media', 'taquitos rape 1/2', 'fritos', 13.50, 13.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'taquitos_corvina', 'taquitos corvina rac', 'fritos', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'taquitos_corvina_media', 'taquitos corvina 1/2', 'fritos', 13.50, 13.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'croquetas', 'croquetas rac', 'fritos', 14.00, 14.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'croquetas_media', 'croquetas 1/2', 'fritos', 8.00, 8.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'frito_variado', 'frito variado', 'fritos', 38.00, 38.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -118,13 +122,13 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'huevo_choco', 'huevos de choco rac', 'plancha_racion', 19.50, 10.70, 0.00, true, NULL),
-            (gen_random_uuid(), 'huevo_choco_media', 'huevos de choco 1/2', 'plancha_racion', 19.50, 10.70, 0.00, true, NULL),
-            (gen_random_uuid(), 'almendrita', 'almendrita rac', 'plancha_racion', 19.50, 10.70, 0.00, true, NULL),
-            (gen_random_uuid(), 'almendrita_media', 'almendrita 1/2', 'plancha_racion', 19.50, 10.70, 0.00, true, NULL),
-            (gen_random_uuid(), 'huevas_merluza_plancha', 'huevas de merluza rac', 'plancha_racion', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'huevas_merluza_plancha_media', 'huevas de merluza 1/2', 'plancha_racion', 19.00, 10.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'morrillo_atun', 'morrillo de atun', 'plancha_racion', 14.00, 8.00, 0.00, true, NULL);
+            (gen_random_uuid(), 'huevo_choco', 'huevos de choco rac', 'plancha_racion', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'huevo_choco_media', 'huevos de choco 1/2', 'plancha_racion', 13.00, 13.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'almendrita', 'almendrita rac', 'plancha_racion', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'almendrita_media', 'almendrita 1/2', 'plancha_racion', 13.00, 13.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'huevas_merluza_plancha', 'huevas de merluza rac', 'plancha_racion', 22.50, 22.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'huevas_merluza_plancha_media', 'huevas de merluza 1/2', 'plancha_racion', 13.00, 13.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'morrillo_atun', 'morrillo de atun', 'plancha_racion', 16.00, 16.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -141,7 +145,7 @@
             (gen_random_uuid(), 'medallon_corvina', 'medallon corvina', 'plancha_pieza', 6.00, 0.00, 0.00, true, NULL),
             (gen_random_uuid(), 'ventresca_atun', 'ventresca atun', 'plancha_pieza', 6.50, 0.00, 0.00, true, NULL),
             (gen_random_uuid(), 'pez_espada', 'pez espada', 'plancha_pieza', 6.50, 0.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'bacalao', 'bacalao', 'plancha_pieza', 16.00, 0.00, 0.00, true, NULL);
+            (gen_random_uuid(), 'bacalao', 'bacalao', 'plancha_pieza', 18.00, 18.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -149,9 +153,10 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'presa_paleta', 'presa paleta', 'carnes', 15.50, 15.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'solomillo_ternera', 'solomillo ternera', 'carnes', 17.50, 17.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'chuletas_cordero', 'chuletas cordero', 'carnes', 17.50, 17.50, 0.00, true, NULL);
+            (gen_random_uuid(), 'presa_paleta', 'presa paleta', 'carnes', 19.50, 19.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'presa_paleta_huevo', 'presa paleta con huevos', 'carnes', 22.00, 22.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'solomillo_ternera', 'solomillo ternera', 'carnes', 20.50, 20.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'chuletas_cordero', 'chuletas cordero', 'carnes', 20.00, 20.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -159,9 +164,9 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'setas_gambas', 'revuelto setas gambas', 'revueltos', 14.00, 14.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'setas_jamon', 'revuelto setas jamon', 'revueltos', 14.00, 14.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'bacalao', 'revuelto bacalao', 'revueltos', 14.00, 14.50, 0.00, true, NULL);
+            (gen_random_uuid(), 'setas_gambas', 'revuelto setas gambas', 'revueltos', 17.50, 17.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'setas_jamon', 'revuelto setas jamon', 'revueltos', 17.50, 17.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'bacalao', 'revuelto bacalao', 'revueltos', 17.50, 17.50, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -169,16 +174,16 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'ensaladilla', 'ensaladilla rac', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'papa_alinia', 'patatas aliñadas rac', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'papa_alioli', 'papatatas alioli rac', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'choco_aliniao', 'chocos aliñados rac', 'raciones_frias', 14.50, 7.20, 0.00, true, NULL),
-            (gen_random_uuid(), 'pulpo_aliniao', 'pulpo aliñado rac', 'raciones_frias', 14.50, 7.20, 0.00, true, NULL),
-            (gen_random_uuid(), 'ensaladilla_media', 'ensaladilla 1/2', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'papa_alinia_media', 'patatas aliñadas 1/2', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'papa_alioli_media', 'papatatas alioli 1/2', 'raciones_frias', 11.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'choco_aliniao_media', 'chocos aliñados 1/2', 'raciones_frias', 14.50, 7.20, 0.00, true, NULL),
-            (gen_random_uuid(), 'pulpo_aliniao_media', 'pulpo aliñado 1/2', 'raciones_frias', 14.50, 7.20, 0.00, true, NULL);
+            (gen_random_uuid(), 'ensaladilla', 'ensaladilla rac', 'raciones_frias', 14.00, 14.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'papa_alinia', 'patatas aliñadas rac', 'raciones_frias', 14.00, 14.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'papa_alioli', 'papatatas alioli rac', 'raciones_frias', 14.00, 14.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'choco_aliniao', 'chocos aliñados rac', 'raciones_frias', 18.00, 18.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'pulpo_aliniao', 'pulpo aliñado rac', 'raciones_frias', 18.00, 18.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'ensaladilla_media', 'ensaladilla 1/2', 'raciones_frias', 8.00, 8.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'papa_alinia_media', 'patatas aliñadas 1/2', 'raciones_frias', 8.00, 8.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'papa_alioli_media', 'papatatas alioli 1/2', 'raciones_frias', 8.00, 8.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'choco_aliniao_media', 'chocos aliñados 1/2', 'raciones_frias', 10.00, 10.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'pulpo_aliniao_media', 'pulpo aliñado 1/2', 'raciones_frias', 10.00, 10.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -186,9 +191,9 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'rabo_toro', 'rabo toro', 'sugerencias', 14.50, 15.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'habas_chocos', 'habas chocos', 'sugerencias', 13.50, 14.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'arroz_caldoso', 'arroz caldoso', 'sugerencias', 13.50, 14.00, 0.00, true, NULL);
+            (gen_random_uuid(), 'rabo_toro', 'rabo toro', 'sugerencias', 18.00, 18.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'habas_chocos', 'habas chocos', 'sugerencias', 17.50, 17.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'arroz_caldoso', 'arroz caldoso', 'sugerencias', 16.50, 16.50, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -196,7 +201,7 @@
         
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'menu_infantil', 'menu infantil', 'infantil', 7.30, 7.50, 0.00, true, NULL);
+            (gen_random_uuid(), 'menu_infantil', 'menu infantil', 'infantil', 9.00, 9.00, 0.00, true, NULL);
         </sql>
     </changeSet>
 
@@ -204,23 +209,101 @@
 
         <sql stripComments="true">
             INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
-            (gen_random_uuid(), 'arroz_leche', 'arroz leche', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'natilla', 'natilla', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'flan', 'flan', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'polea', 'polea', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'leche_frita', 'leche frita', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'crema_limon', 'crema limon', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'tarta_chocolate', 'tarta chocolate', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'tarta_queso', 'tarta queso', 'postres', 4.10, 4.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'helado', 'helado', 'postres', 6.10, 6.10, 0.00, true, NULL),
-            (gen_random_uuid(), 'luis_felipe', 'luis felipe', 'postres', 8.00, 8.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'bombones', 'bombones', 'postres', 4.00, 4.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'fresas', 'fresas', 'postres', 3.00, 3.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'arroz_leche', 'arroz leche', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'natilla', 'natilla', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'flan', 'flan', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'polea', 'polea', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'leche_frita', 'leche frita', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'crema_limon', 'crema limon', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'tarta_chocolate', 'tarta chocolate', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'tarta_queso', 'tarta queso', 'postres', 4.70, 4.70, 0.00, true, NULL),
+            (gen_random_uuid(), 'helado', 'helado', 'postres', 7.50, 7.50, 0.00, true, NULL),
+            (gen_random_uuid(), 'luis_felipe', 'luis felipe', 'postres', 9.00, 9.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'bombones', 'bombones', 'postres', 5.00, 5.00, 0.00, true, NULL),
+            (gen_random_uuid(), 'fresas', 'fresas', 'postres', 3.30, 3.30, 0.00, true, NULL),
             (gen_random_uuid(), 'fresas_zumo', 'fresas zumo', 'postres', 6.00, 6.00, 0.00, true, NULL),
-            (gen_random_uuid(), 'melon', 'melon', 'postres', 2.50, 2.50, 0.00, true, NULL),
-            (gen_random_uuid(), 'sandia', 'sandia', 'postres', 2.50, 2.50, 0.00, true, NULL);
+            (gen_random_uuid(), 'melon', 'melon', 'postres', 3.30, 3.30, 0.00, true, NULL),
+            (gen_random_uuid(), 'sandia', 'sandia', 'postres', 3.30, 3.30, 0.00, true, NULL);
         </sql>
     </changeSet>
-    
-    
+
+    <changeSet id="insert-vinos-blancos" author="frc">
+        <sql stripComments="true">
+            INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
+            (gen_random_uuid(), 'gran_privilegio_condado', 'Gran Privilegio del Condado afrutado', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'gran_barredero_seco', 'Gran Barredero Seco', 'vino_blanco', 16.50, 16.50, 16.50, false, NULL),
+            (gen_random_uuid(), 'pispireto_calancha', 'Pizpireto de Calancha', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'calancha_seco', 'Calancha (seco)', 'vino_blanco', 15.00, 15.00, 15.00, false, NULL),
+            (gen_random_uuid(), 'la_camoneta', 'La Camoneta (Frizzante 5.5 Verdejo)', 'vino_blanco', 13.50, 13.50, 13.50, false, NULL),
+            (gen_random_uuid(), 'castillo_san_diego', 'Castillo San Diego', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'habla_ti', 'Habla de ti (Sauvignon Blanc)', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'pulpo', 'Pulpo', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'martin_codax', 'Martín Codax', 'vino_blanco', 23.00, 23.00, 23.00, false, NULL),
+            (gen_random_uuid(), 'mar_frades', 'Mar de Frades', 'vino_blanco', 27.00, 27.00, 27.00, false, NULL),
+            (gen_random_uuid(), 'terra_gaudas', 'Terra Gaudas', 'vino_blanco', 27.00, 27.00, 27.00, false, NULL),
+            (gen_random_uuid(), 'blanc_pescador', 'Blanc Pescador', 'vino_blanco', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'waltraud', 'Waltraud', 'vino_blanco', 35.00, 35.00, 35.00, false, NULL),
+            (gen_random_uuid(), 'analvia_verdejo', 'Analvia 100% Verdejo', 'vino_blanco', 17.00, 17.00, 17.00, false, NULL),
+            (gen_random_uuid(), 'jose_pariente', 'José Pariente', 'vino_blanco', 21.00, 21.00, 21.00, false, NULL),
+            (gen_random_uuid(), 'enate_chardonnay', 'Enate Chardonnay-234', 'vino_blanco', 21.00, 21.00, 21.00, false, NULL),
+            (gen_random_uuid(), 'tio_pepe', 'Solear o Tío Pepe', 'vino_blanco', 19.00, 19.00, 19.00, false, NULL),
+            (gen_random_uuid(), 'juve_camps', 'Juvé Camps Reserva de Familia', 'vino_blanco', 28.00, 28.00, 28.00, false, NULL),
+            (gen_random_uuid(), 'moet_chandon_chica', 'Moët Chandon 3/8', 'vino_blanco', 38.00, 38.00, 38.00, false, NULL),
+            (gen_random_uuid(), 'moet_chandon', 'Moët Chandon', 'vino_blanco', 65.00, 65.00, 65.00, false, NULL),
+            (gen_random_uuid(), 'dom_perignon', 'Dom Pérignon', 'vino_blanco', 250.00, 250.00, 250.00, false, NULL);
+        </sql>
+    </changeSet>
+    <changeSet id="insert-vinos-rosados" author="frc">
+        <sql stripComments="true">
+            INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
+            (gen_random_uuid(), 'penascal', 'Peñascal', 'vino_rosado', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'enate', 'Enate', 'vino_rosado', 18.00, 18.00, 18.00, false, NULL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-riojas" author="frc">
+        <sql stripComments="true">
+            INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
+            (gen_random_uuid(), 'arnegui_crianza', 'Arnegui crianza (rioja casa)', 'rioja', 18.00, 18.00, 18.00, false, NULL),
+            (gen_random_uuid(), 'marques_caceres', 'Marqués de Cáceres', 'rioja', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'ramon_bilbao', 'Ramón Bilbao', 'rioja', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'marques_riscal_reserva', 'Marqués de Riscal reserva', 'rioja', 30.00, 30.00, 30.00, false, NULL),
+            (gen_random_uuid(), 'muga', 'Muga', 'rioja', 30.00, 30.00, 30.00, false, NULL),
+            (gen_random_uuid(), 'azpilicueta', 'Azpilicueta', 'rioja', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'beronia', 'Beronia', 'rioja', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'Habla_silencio', 'Habla del silencio', 'rioja', 20.00, 20.00, 20.00, false, NULL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-ribera-duero" author="frc">
+        <sql stripComments="true">
+            INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
+            (gen_random_uuid(), 'pago_fuentecejo', 'Pago de Fuentecojo', 'ribera_duero', 29.00, 29.00, 29.00, false, NULL),
+            (gen_random_uuid(), 'condado_oriza_crianza', 'Condado de Oriza crianza', 'ribera_duero', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'protos_roble', 'Protos roble', 'ribera_duero', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'protos_crianza', 'Protos crianza', 'ribera_duero', 31.00, 31.00, 31.00, false, NULL),
+            (gen_random_uuid(), 'yllera', 'Yllera', 'ribera_duero', 20.00, 20.00, 20.00, false, NULL),
+            (gen_random_uuid(), 'pesquera_crianza', 'Pesquera crianza', 'ribera_duero', 37.00, 37.00, 37.00, false, NULL),
+            (gen_random_uuid(), 'matarromera_crianza', 'Matarromera crianza', 'ribera_duero', 38.00, 38.00, 38.00, false, NULL),
+            (gen_random_uuid(), 'pago_capellanes', 'Pago de los Capellanes', 'ribera_duero', 38.00, 38.00, 38.00, false, NULL),
+            (gen_random_uuid(), 'emilio_moro_crianza', 'Emilio Moro crianza', 'ribera_duero', 49.00, 49.00, 49.00, false, NULL),
+            (gen_random_uuid(), 'pago_carraovejas_crianza', 'Pago de Carraovejas crianza', 'ribera_duero', 49.00, 49.00, 49.00, false, NULL),
+            (gen_random_uuid(), 'valbuena', 'Valbuena', 'ribera_duero', 198.00, 198.00, 198.00, false, NULL),
+            (gen_random_uuid(), 'vega_sicilia_unico_94', 'Vega Sicilia “Único 94”', 'ribera_duero', 380.00, 380.00, 380.00, false, NULL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-otros" author="frc">
+        <sql stripComments="true">
+            INSERT INTO producto (id, code, nombre, familia, precio1, precio2, precio3, cocina, seccion) VALUES
+            (gen_random_uuid(), 'plato_patatas', 'Plato de patatas', 'Plato de patatas', 3.00, 3.00, 3.00, false, NULL),
+            (gen_random_uuid(), 'mayonesa', 'mayonesa', 'mayonesa', 1.00, 1.00, 1.00, false, NULL),
+            (gen_random_uuid(), 'espaguettis', 'espaguettis', 'espaguettis', 3.00, 3.00, 3.00, false, NULL),
+            (gen_random_uuid(), 'varios', 'varios', 'varios', 0.00, 0.00, 0.00, false, NULL),
+            (gen_random_uuid(), 'bolsa_patatas', 'Bolsa de patatas', 'Bolsa de patatas', 2.00, 2.00, 2.00, false, NULL);
+        </sql>
+    </changeSet>
+
+
+
 </databaseChangeLog>

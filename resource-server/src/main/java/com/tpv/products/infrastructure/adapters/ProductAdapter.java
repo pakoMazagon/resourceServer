@@ -16,7 +16,7 @@ public class ProductAdapter implements ProductPort {
 
     @Override
     public List<Producto> findAll() {
-        return this.productoRepository.findAll();
+        return this.productoRepository.findAllByOrderByNombreAsc();
     }
 
     @Override

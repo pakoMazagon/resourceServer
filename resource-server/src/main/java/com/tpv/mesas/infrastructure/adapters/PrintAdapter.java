@@ -367,7 +367,7 @@ public class PrintAdapter implements PrintPort {
             baos.write("MAZAGÓN, C.B.\n".getBytes(charset));
             baos.write("Avda/ Fuentepiña, 11\n".getBytes(charset));
             baos.write("TELÉFONOS: 959536825/675733682\n".getBytes(charset));
-            baos.write("N.I.F.: E12520705\n".getBytes(charset));
+            baos.write("N.I.F.: E21520705\n".getBytes(charset));
             baos.write("10% IVA INCLUIDO\n\n".getBytes(charset));
 
             // === DATOS FACTURA ===
@@ -400,8 +400,8 @@ public class PrintAdapter implements PrintPort {
                 total += importe;
 
                 String nombre = Optional.ofNullable(p.getNombre()).orElse("-");
-                if (nombre.length() > 18) {
-                    nombre = nombre.substring(0, 18); // evita desbordar línea
+                if (nombre.length() > 26) {
+                    nombre = nombre.substring(0, 26); // evita desbordar línea
                 }
 
                 baos.write(this.formatLine(nombre, String.valueOf(unidades),
@@ -435,79 +435,10 @@ public class PrintAdapter implements PrintPort {
         return baos.toByteArray();
     }
 
-    private byte[] buildTicket() {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Charset charset = Charset.forName(NAME_PRINTER);
-
-        try {
-            baos.write(EscPosCommands.INIT);
-            baos.write(EscPosCommands.SELECT_CP858);
-
-            // Si quieres imprimir el logo, llama aquí:
-            // baos.write(printImage("src/main/resources/logo_bar_bw.png"));
-
-            // === CABECERA ===
-            baos.write(EscPosCommands.CENTER);
-            baos.write(EscPosCommands.BOLD_ON);
-            baos.write(EscPosCommands.DOUBLE_ON);
-            baos.write("BAR-REST EL CHOCO\n".getBytes(charset));
-            baos.write(EscPosCommands.DOUBLE_OFF);
-            baos.write(EscPosCommands.BOLD_OFF);
-            baos.write("MAZAGÓN, C.B.\n".getBytes(charset));
-            baos.write("Avda/ Fuentepeñas, 11\n".getBytes(charset));
-            baos.write("TELÉFONO: 959536825\n".getBytes(charset));
-            baos.write("N.I.F.: E12520705\n".getBytes(charset));
-            baos.write("10% IVA INCLUIDO\n\n".getBytes(charset));
-
-            // === DATOS FACTURA ===
-            baos.write(EscPosCommands.LEFT);
-            baos.write("CAJA: CAJA 0001\n".getBytes(charset));
-            baos.write("FACTURA SIMPLIFICADA: 106463T\n".getBytes(charset));
-            baos.write("FECHA: 01/11/25   HORA: 19:42:33\n".getBytes(charset));
-            baos.write("OPERARIO: OPERARIO PRINCIPAL\n".getBytes(charset));
-            baos.write("MESA: 02/15\n".getBytes(charset));
-            baos.write(SEPARATOR.getBytes(charset));
-
-            // === ENCABEZADO DE ARTÍCULOS ===
-            baos.write(EscPosCommands.BOLD_ON);
-            baos.write(this.formatLine("ARTÍCULO", "UD", "PRECIO", "IMPORTE").getBytes(charset));
-            baos.write(EscPosCommands.BOLD_OFF);
-            baos.write(SEPARATOR.getBytes(charset));
-
-            // === LÍNEAS DE PRODUCTOS ===
-            baos.write(this.formatLine("CERVEZA", "2", "3.00", "6.00").getBytes(charset));
-            baos.write(this.formatLine("CHIPIRONES PLANCHA", "1", "12.00", "12.00").getBytes(charset));
-            baos.write(this.formatLine("CROQUETAS JAMÓN", "1", "8.00", "8.00").getBytes(charset));
-            baos.write(this.formatLine("PULPO A LA GALLEGA", "1", "15.00", "15.00").getBytes(charset));
-            baos.write(SEPARATOR.getBytes(charset));
-
-            // === TOTAL ===
-            baos.write(EscPosCommands.RIGHT);
-            baos.write(EscPosCommands.BOLD_ON);
-            baos.write("TOTAL: 41.00 EUR\n".getBytes(charset));
-            baos.write(EscPosCommands.BOLD_OFF);
-
-            // === PIE ===
-            baos.write(EscPosCommands.LEFT);
-            baos.write("\nFue atendido por: Chato\n".getBytes(charset));
-
-            baos.write(EscPosCommands.CENTER);
-            baos.write("\nGRACIAS POR SU VISITA\n".getBytes(charset));
-
-            // más espacio para corte
-            baos.write("\n\n\n\n\n".getBytes(charset));
-            baos.write(EscPosCommands.CUT);
-
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-
-        return baos.toByteArray();
-    }
 
     private String formatLine(String articulo, String ud, String precio, String importe) {
-        final int widthArticulo = 24;
-        final int widthUd = 6;
+        final int widthArticulo = 28;
+        final int widthUd = 2;
         final int widthPrecio = 8;
         final int widthImporte = 8;
 
